@@ -1,9 +1,5 @@
-# scrivito-cookier-banner
-
-configuration:
-
 {
-  "name": "_bime_cnsnt",
+  "name": "_bima_cnsnt",
   "blocks": [
     {
       "name": "functional",

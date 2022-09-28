@@ -1,0 +1,55 @@
+{
+  "CookieDeclinedPlaceholder": {
+    "buttonText": "Cookies zulassen",
+    "gmap": {
+      "iconClass": "fas fa-map-marked-alt",
+      "title": "Cookies abgelehnt",
+      "text": "Sie haben der Verwendung von Cookies nicht zugestimmt. Solange Sie die Zustimmung nicht gegeben haben, wird dieses Element nicht dargestellt."
+    }
+  },
+  "openCookiesConsent": "Cookie-Einstellungen",
+  "buttons": {
+    "settings": "Einstellungen",
+    "acceptAll": "Alle zulassen",
+    "declineAll": "Alle ablehnen",
+    "saveAndClose": "speichern und schliessen"
+  },
+  "cookieDefinitions": {
+    "functional": {
+      "title": "Funktionell",
+      "description": "Mit diesen Tags können wir die Nutzung der Website analysieren, um deren Leistung zu messen und zu verbessern.",
+      "cookies": {
+        "gmap": {
+          "title": "Google Maps",
+          "description": {
+            "title": "Google Maps",
+            "text": ""
+          }
+        },
+        "vimeo": {
+          "title": "Vimeo Video",
+          "description": {
+            "title": "Vimeo Video",
+            "text": ""
+          }
+        }
+      }
+    },
+    "essential": {
+      "title": "Essentiell",
+      "description": "Diese Tags werden für die Grundfunktionen der Website benötigt.",
+      "cookies": {
+        "authentication": {
+          "title": "Authentifizierung",
+          "description": {
+            "title": "Authentifizierung",
+            "text": ""
+          }
+        }
+      }
+    }
+  },
+  "settings": {
+    "title": "Cookie-Einstellungen"
+  }
+}

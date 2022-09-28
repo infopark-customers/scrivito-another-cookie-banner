@@ -1,15 +1,43 @@
 import * as React from "react";
 import { useCookies } from "react-cookie";
+import { parseDomain, ParseResultType } from "parse-domain";
+
+import defaultConfig from "../config/cookieConfiguration.json";
 
 const CookieConsentContext = React.createContext({});
 
 export function CookieConsentProvider({ cookieConfig, children }) {
-  const COOKIE_NAME = "_bima_cncnt";
+  const cConfig = cookieConfig || defaultConfig;
+  const COOKIE_NAME = cConfig.cookieName || "_c_cnsnt";
   const ACCEPTED = "accepted";
   const DECLINED = "declined";
 
   const [cookies, setCookie] = useCookies([COOKIE_NAME]);
   const [bannerVisibility, setBannerVisibility] = React.useState(false);
+
+  const domainName = () => {
+    // TODO: use parse result for domain
+    const parseResult = parseDomain(window.location.hostname);
+
+    switch (parseResult.type) {
+      case ParseResultType.Listed: {
+        const { hostname, topLevelDomains } = parseResult;
+    
+        console.log(`${hostname} belongs to ${topLevelDomains.join(".")}`);
+        break;
+      }
+      case ParseResultType.Reserved:
+      case ParseResultType.NotListed: {
+        const { hostname } = parseResult;
+    
+        console.log(`${hostname} is a reserved or unknown domain`);
+        break;
+      }
+      default:
+        throw new Error(`${hostname} is an ip address or invalid domain`);
+    }
+    return null;
+  }
 
   const [cookieConsentChoice, setCookieConsentChoice] = React.useState(
     cookies[COOKIE_NAME] || {}
@@ -22,7 +50,7 @@ export function CookieConsentProvider({ cookieConfig, children }) {
     }
   }, [cookies]);
 
-  const editableCookies = cookieConfig.flatMap((item) =>
+  const editableCookies = cConfig.blocks.flatMap((item) =>
     item.editable ? item.cookies : []
   );
 
@@ -32,8 +60,9 @@ export function CookieConsentProvider({ cookieConfig, children }) {
       path: "/",
       expires: new Date(new Date().setFullYear(new Date().getFullYear() + 1)),
     };
-    if (window.location.hostname !== "localhost") {
-      options.domain = ".bundesimmobilien.de";
+    const dName = domainName();
+    if (dName) {
+      options.domain = dName;
     }
     setCookie(COOKIE_NAME, value, options);
   };
@@ -77,7 +106,7 @@ export function CookieConsentProvider({ cookieConfig, children }) {
   };
 
   const cookieTypeNames = (typeName) =>
-    cookieConfig.find((item) => item.name === typeName)?.cookies || [];
+    cConfig.find((item) => item.name === typeName)?.cookies || [];
 
   return (
     <CookieConsentContext.Provider

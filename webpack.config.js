@@ -3,7 +3,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   entry: {
-    index: "./src/index.ts",
+    index: "./src/index.js",
     cssBundle: "./src/assets/stylesheets/main.scss",
   },
   module: {
@@ -68,7 +68,7 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     publicPath: path.resolve(__dirname, "dist"),
     libraryTarget: "umd",
-    library: "jr-customer-portal-sdk",
+    library: "scrivito-cookie-banner",
     globalObject: "this",
   },
   mode: "production",
