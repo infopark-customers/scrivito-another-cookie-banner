@@ -6,8 +6,9 @@ import defaultConfig from "../config/cookieConfiguration.json";
 const CookieConsentContext = React.createContext({});
 
 export function CookieConsentProvider({ cookieConfig, children }) {
+  console.log("CookieConsentProvider: ", cookieConfig);
   const cConfig = cookieConfig || defaultConfig;
-  const COOKIE_NAME = cConfig.cookieName || "_c_cnsnt";
+  const COOKIE_NAME = cConfig.name || defaultConfig.name;
   const ACCEPTED = "accepted";
   const DECLINED = "declined";
   const EXTENDED_MODE = "expanded";
