@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Accordion } from "react-bootstrap";
 import className from "classnames";
-import I18n from "../../config/i18n";
+import I18n from "../config/i18n";
 import SingleCookieBlock from "./SingleCookieBlock";
 import { useCookieConsent } from "./CookieConsentContext";
 

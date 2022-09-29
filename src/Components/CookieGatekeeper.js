@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useCookieConsent } from "./CookieConsentContext";
 import CookieDeclinedPlaceholder from "./CookieDeclinedPlaceholder";
-import I18n from "../../config/i18n";
+import I18n from "../config/i18n";
 
 function CookieGatekeeper({ children, cookieName }) {
   const { isAccepted } = useCookieConsent();

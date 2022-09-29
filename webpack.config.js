@@ -1,5 +1,6 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const SRC_PATH = path.join(__dirname, "src");
 
 module.exports = {
   entry: {
@@ -8,6 +9,30 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.js$/,
+        include: [SRC_PATH],
+        use: [
+          {
+            loader: "babel-loader",
+            options: {
+              presets: [
+                "@babel/preset-react",
+                [
+                  "@babel/preset-env",
+                  {
+                    debug: false,
+                    modules: false,
+                    shippedProposals: false,
+                    useBuiltIns: false,
+                  },
+                ],
+              ],
+              cacheDirectory: "tmp/babel-cache",
+            },
+          },
+        ],
+      },
       {
         test: /\.tsx?$/,
         use: "ts-loader",
@@ -40,23 +65,6 @@ module.exports = {
   },
   resolve: {
     extensions: [".ts", ".js", ".tsx", ".scss"],
-  },
-  externals: {
-    "@honeybadger-io/js": "@honeybadger-io/js",
-    axios: "axios",
-    classnames: "classnames",
-    "date-fns": "date-fns",
-    "date-fns/locale": "date-fns/locale",
-    "html-react-parser": "html-react-parser",
-    lodash: "lodash",
-    "lodash-es": "lodash-es",
-    react: "react",
-    "react-dom": "react-dom",
-    "react-bootstrap": "react-bootstrap",
-    "react-overlays": "react-overlays",
-    "sanitize-html": "sanitize-html",
-    scrivito: "scrivito",
-    uuid: "uuid",
   },
   plugins: [
     new MiniCssExtractPlugin({

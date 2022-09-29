@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as Scrivito from "scrivito";
 import { Modal, Button } from "react-bootstrap";
-import I18n from "../../config/i18n";
+import I18n from "../config/i18n";
 import BannerHeader from "./BannerHeader";
 import { useCookieConsent } from "./CookieConsentContext";
 

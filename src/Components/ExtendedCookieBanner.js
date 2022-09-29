@@ -4,10 +4,9 @@ import BannerHeader from "./BannerHeader";
 import CookieTypeBlock from "./CookieTypeBlock";
 import { useCookieConsent } from "./CookieConsentContext";
 
-import cookieConfig from "../../config/cookieBannerConfig.json";
-import I18n from "../../config/i18n";
+import I18n from "../config/i18n";
 
-function ExtendedCookieBanner({ show, onHide, obj }) {
+function ExtendedCookieBanner({ show, onHide, obj, cookieConfig }) {
   const { setBannerVisibility, acceptAll } = useCookieConsent();
 
   return (

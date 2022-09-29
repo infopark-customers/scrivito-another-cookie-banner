@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useCookies } from "react-cookie";
-import {domainName} from "../utils/domainName";
+import domainName from "../utils/domainName";
 import defaultConfig from "../config/cookieConfiguration.json";
 
 const CookieConsentContext = React.createContext({});

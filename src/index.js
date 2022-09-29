@@ -1,6 +1,6 @@
-import "./Objs/CookieConfigComponent";
-import "./Objs/CookieConfigEditingConfig";
-import "./Objs/CookieConfigObjClass";
+import "./Objs/CookieConfig/CookieConfigComponent";
+import "./Objs/CookieConfig/CookieConfigEditingConfig";
+import "./Objs/CookieConfig/CookieConfigObjClass";
 import "./Components/BannerHeader";
 import "./Components/CookieBanner";
 import "./Components/CookieConsentContext";

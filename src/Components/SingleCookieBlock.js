@@ -1,6 +1,6 @@
 import * as React from "react";
 import InformationBlock from "./InformationBlock";
-import I18n from "../../config/i18n";
+import I18n from "../config/i18n";
 import { useCookieConsent } from "./CookieConsentContext";
 
 function SingleCookieBlock({ blockName, cookieName, editable }) {
