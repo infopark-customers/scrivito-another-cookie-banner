@@ -1,6 +1,3 @@
-// import "./Objs/CookieConfig/CookieConfigComponent";
-// import "./Objs/CookieConfig/CookieConfigEditingConfig";
-// import "./Objs/CookieConfig/CookieConfigObjClass";
 // import "./Components/BannerHeader";
 export {default as CookieBanner} from "./Components/CookieBanner";
 import { useCookieConsent, CookieConsentProvider } from "./Components/CookieConsentContext";
