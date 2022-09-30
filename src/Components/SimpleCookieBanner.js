@@ -5,13 +5,14 @@ import I18n from "../config/i18n";
 import BannerHeader from "./BannerHeader";
 import { useCookieConsent } from "./CookieConsentContext";
 
-function SimpleCookieBanner({ show, onHide, obj }) {
-  const { acceptAll, declineAll, switchBannerMode } = useCookieConsent();
+function SimpleCookieBanner({ obj }) {
+  const { acceptAll, declineAll, switchBannerMode, bannerVisibility, setBannerVisibility, isExtendedMode } = useCookieConsent();
+  console.log("SimpleCookieBanner" , bannerVisibility)
   return (
     <Modal
       className="cookie-banner modal-dialog-scrollable"
-      show={show}
-      onHide={onHide}
+      show={bannerVisibility && !isExtendedMode()}
+      onHide={() => setBannerVisibility(false)}
     >
       <BannerHeader obj={obj} />
       <Modal.Body>

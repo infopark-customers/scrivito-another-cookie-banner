@@ -15,7 +15,7 @@ export function CookieConsentProvider({ cookieConfig, children }) {
   const SIMPLE_MODE="simple";
 
   const [cookies, setCookie] = useCookies([COOKIE_NAME]);
-  const [bannerVisibility, setBannerVisibility] = React.useState(false);
+  const [bannerVisibility, setBannerVisibility] = React.useState(true);
 
   const [cookieConsentChoice, setCookieConsentChoice] = React.useState(
     cookies[COOKIE_NAME] || {}
@@ -23,7 +23,9 @@ export function CookieConsentProvider({ cookieConfig, children }) {
   const [bannerMode, setBannerMode] = React.useState(SIMPLE_MODE);
 
   React.useEffect(() => {
+    console.log("--- cookies:", cookies[COOKIE_NAME], COOKIE_NAME)
     if (!cookies[COOKIE_NAME]) {
+      console.log("--- setBannerVis to true")
       setBannerVisibility(true);
     }
   }, [cookies]);
@@ -89,6 +91,7 @@ export function CookieConsentProvider({ cookieConfig, children }) {
   return (
     <CookieConsentContext.Provider
       value={{
+        cookieBlocks: () => cConfig.blocks,
         cookieConsentChoice,
         bannerVisibility,
         acceptAll: () => setDecisionForAllCookies(ACCEPTED),

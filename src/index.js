@@ -2,7 +2,7 @@
 // import "./Objs/CookieConfig/CookieConfigEditingConfig";
 // import "./Objs/CookieConfig/CookieConfigObjClass";
 // import "./Components/BannerHeader";
-import CookieBanner from "./Components/CookieBanner";
+export {default as CookieBanner} from "./Components/CookieBanner";
 import { useCookieConsent, CookieConsentProvider } from "./Components/CookieConsentContext";
 // import "./Components/CookieDeclinedPlaceholder";
 // import CookieGatekeeper from "./Components/CookieGatekeeper";
@@ -14,5 +14,4 @@ import { useCookieConsent, CookieConsentProvider } from "./Components/CookieCons
 export {
   useCookieConsent,
   CookieConsentProvider,
-  CookieBanner,
 }
