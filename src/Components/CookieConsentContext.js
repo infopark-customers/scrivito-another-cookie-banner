@@ -5,8 +5,7 @@ import defaultConfig from "../config/cookieConfiguration.json";
 
 const CookieConsentContext = React.createContext({});
 
-export function CookieConsentProvider({ cookieConfig, children }) {
-  console.log("CookieConsentProvider: ", cookieConfig);
+export function CookieConsentProvider({ cookieConfig, logoUrl,  children }) {
   const cConfig = cookieConfig || defaultConfig;
   const COOKIE_NAME = cConfig.name || defaultConfig.name;
   const ACCEPTED = "accepted";
@@ -15,17 +14,15 @@ export function CookieConsentProvider({ cookieConfig, children }) {
   const SIMPLE_MODE="simple";
 
   const [cookies, setCookie] = useCookies([COOKIE_NAME]);
-  const [bannerVisibility, setBannerVisibility] = React.useState(true);
 
+  const [bannerVisibility, setBannerVisibility] = React.useState(false);
   const [cookieConsentChoice, setCookieConsentChoice] = React.useState(
     cookies[COOKIE_NAME] || {}
   );
   const [bannerMode, setBannerMode] = React.useState(SIMPLE_MODE);
 
   React.useEffect(() => {
-    console.log("--- cookies:", cookies[COOKIE_NAME], COOKIE_NAME)
     if (!cookies[COOKIE_NAME]) {
-      console.log("--- setBannerVis to true")
       setBannerVisibility(true);
     }
   }, [cookies]);
@@ -91,6 +88,7 @@ export function CookieConsentProvider({ cookieConfig, children }) {
   return (
     <CookieConsentContext.Provider
       value={{
+        logoUrl,
         cookieBlocks: () => cConfig.blocks,
         cookieConsentChoice,
         bannerVisibility,

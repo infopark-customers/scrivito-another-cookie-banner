@@ -6,11 +6,16 @@ import { useCookieConsent } from "./CookieConsentContext";
 
 export default function Header() {
   const { 
-    isExtendedMode 
+    isExtendedMode,
+    logoUrl
   } = useCookieConsent();
   return (
     <Modal.Header closeButton={isExtendedMode()}>
-      <img src={defaultLogo} alt={I18n.t("BannerHeader.logoAlt", {ns: "cookieBanner"})} className="img-fluid" />
+      <img 
+        src={logoUrl || defaultLogo} 
+        alt={I18n.t("BannerHeader.logoAlt", {ns: "cookieBanner"})} 
+        className="img-fluid" 
+      />
     </Modal.Header>
   );
 }

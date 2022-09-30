@@ -8,6 +8,7 @@ export default function Footer() {
   const { 
     setBannerVisibility, 
     acceptAll, 
+    declineAll,
     switchBannerMode, 
     isExtendedMode 
   } = useCookieConsent();
