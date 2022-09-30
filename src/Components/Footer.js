@@ -2,7 +2,6 @@
 import * as React from "react";
 import { Modal, Button } from "react-bootstrap";
 import { useCookieConsent } from "./CookieConsentContext";
-import I18n from "../config/i18n";
 
 export default function Footer() {
   const { 
@@ -10,7 +9,8 @@ export default function Footer() {
     acceptAll, 
     declineAll,
     switchBannerMode, 
-    isExtendedMode 
+    isExtendedMode,
+    I18n,
   } = useCookieConsent();
   if (isExtendedMode()) {
     return (

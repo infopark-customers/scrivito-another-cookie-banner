@@ -3,12 +3,12 @@ import * as React from "react";
 import { Modal, Button, Accordion } from "react-bootstrap";
 import CookieTypeBlock from "./CookieTypeBlock";
 import { useCookieConsent } from "./CookieConsentContext";
-import I18n from "../config/i18n";
 
 export default function Body() {
   const { 
     cookieBlocks, 
-    isExtendedMode 
+    isExtendedMode,
+    I18n,
   } = useCookieConsent();
 
   if (isExtendedMode()) {

@@ -2,16 +2,25 @@ import * as React from "react";
 import { useCookies } from "react-cookie";
 import domainName from "../utils/domainName";
 import defaultConfig from "../config/cookieConfiguration.json";
+import I18n from "../config/i18n";
 
 const CookieConsentContext = React.createContext({});
 
-export function CookieConsentProvider({ cookieConfig, logoUrl,  children }) {
+export function CookieConsentProvider({ cookieConfig, logoUrl,  children, language, translations }) {
   const cConfig = cookieConfig || defaultConfig;
   const COOKIE_NAME = cConfig.name || defaultConfig.name;
   const ACCEPTED = "accepted";
   const DECLINED = "declined";
   const EXTENDED_MODE = "expanded";
   const SIMPLE_MODE="simple";
+  if (language && I18n.resolvedLanguage !== language) {
+    I18n.language = language;
+  }
+  if (translations) {
+    Object.keys(translations).forEach((lang) => {
+      I18n.addResourceBundle(lang, "cookieBanner", translations[lang], true, true);
+    })
+  }
 
   const [cookies, setCookie] = useCookies([COOKIE_NAME]);
 
@@ -88,6 +97,7 @@ export function CookieConsentProvider({ cookieConfig, logoUrl,  children }) {
   return (
     <CookieConsentContext.Provider
       value={{
+        I18n,
         logoUrl,
         cookieBlocks: () => cConfig.blocks,
         cookieConsentChoice,
