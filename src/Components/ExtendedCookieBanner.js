@@ -6,7 +6,7 @@ import { useCookieConsent } from "./CookieConsentContext";
 
 import I18n from "../config/i18n";
 
-function ExtendedCookieBanner({ obj }) {
+function ExtendedCookieBanner() {
   const { setBannerVisibility, acceptAll, cookieBlocks, bannerVisibility, switchBannerMode, isExtendedMode } = useCookieConsent();
 
   return (
@@ -15,12 +15,12 @@ function ExtendedCookieBanner({ obj }) {
       show={bannerVisibility && isExtendedMode()}
       onHide={() => switchBannerMode()}
     >
-      <BannerHeader closeButton={true} obj={obj} />
+      <BannerHeader closeButton={true} />
       <Modal.Body>
-        <h5>{I18n.t("CookieBanner.settings.title", { ns: "live" })}</h5>
+        <h5>{I18n.t("settings.title", { ns: "cookieBanner" })}</h5>
         <div className="sm-white-space" />
         <Accordion className="accordion">
-          {cookieBlocks.map((item, index) => (
+          {cookieBlocks().map((item, index) => (
             <CookieTypeBlock
               key={`c-${index}`}
               cookieDescription={item}
@@ -31,10 +31,10 @@ function ExtendedCookieBanner({ obj }) {
       </Modal.Body>
       <Modal.Footer>
         <Button variant="primary" onClick={() => setBannerVisibility(false)}>
-          {I18n.t("CookieBanner.buttons.saveAndClose", { ns: "live" })}
+          {I18n.t("buttons.saveAndClose", { ns: "cookieBanner" })}
         </Button>
         <Button variant="primary" onClick={() => acceptAll()}>
-          {I18n.t("CookieBanner.buttons.acceptAll", { ns: "live" })}
+          {I18n.t("buttons.acceptAll", { ns: "cookieBanner" })}
         </Button>
       </Modal.Footer>
     </Modal>

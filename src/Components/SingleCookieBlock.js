@@ -17,21 +17,21 @@ function SingleCookieBlock({ blockName, cookieName, editable }) {
       />
       <label className="form-check-label" htmlFor="flexCheckDefault">
         {I18n.t(
-          `CookieBanner.cookieDefinitions.${blockName}.cookies.${cookieName}.title`,
-          { ns: "live" }
+          `cookieDefinitions.${blockName}.cookies.${cookieName}.title`,
+          { ns: "cookieBanner" }
         )}
       </label>
       <InformationBlock>
         <small>
           {I18n.t(
-            `CookieBanner.cookieDefinitions.${blockName}.cookies.${cookieName}.description.title`,
-            { ns: "live" }
+            `cookieDefinitions.${blockName}.cookies.${cookieName}.description.title`,
+            { ns: "cookieBanner" }
           )}
         </small>
         <p>
           {I18n.t(
-            `CookieBanner.cookieDefinitions.${blockName}.cookies.${cookieName}.description.text`,
-            { ns: "live" }
+            `cookieDefinitions.${blockName}.cookies.${cookieName}.description.text`,
+            { ns: "cookieBanner" }
           )}
         </p>
       </InformationBlock>

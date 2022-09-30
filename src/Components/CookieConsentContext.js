@@ -86,7 +86,7 @@ export function CookieConsentProvider({ cookieConfig, children }) {
   };
 
   const cookieTypeNames = (typeName) =>
-    cConfig.find((item) => item.name === typeName)?.cookies || [];
+    cConfig.blocks.find((item) => item.name === typeName)?.cookies || [];
 
   return (
     <CookieConsentContext.Provider

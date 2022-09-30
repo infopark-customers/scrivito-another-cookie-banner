@@ -5,38 +5,35 @@ import I18n from "../config/i18n";
 import BannerHeader from "./BannerHeader";
 import { useCookieConsent } from "./CookieConsentContext";
 
-function SimpleCookieBanner({ obj }) {
+function SimpleCookieBanner() {
   const { acceptAll, declineAll, switchBannerMode, bannerVisibility, setBannerVisibility, isExtendedMode } = useCookieConsent();
-  console.log("SimpleCookieBanner" , bannerVisibility)
   return (
     <Modal
       className="cookie-banner modal-dialog-scrollable"
       show={bannerVisibility && !isExtendedMode()}
       onHide={() => setBannerVisibility(false)}
     >
-      <BannerHeader obj={obj} />
+      <BannerHeader />
       <Modal.Body>
-        <Scrivito.ContentTag tag="h5" content={obj} attribute="title" />
-        <Scrivito.ContentTag content={obj} attribute="body" />
+        <h5>
+          {I18n.t("SimpleBanner.title", {ns: "cookieBanner"})}
+        </h5>
+        <div dangerouslySetInnerHTML={{ __html: I18n.t("SimpleBanner.text", {ns: "cookieBanner"})}} />
         <ul className="inline-no-list-type">
-          {obj.get("links").map((link, index) => (
-            <li key={index}>
-              <Scrivito.LinkTag to={link} title={link.title()} target="_blank">
-                {link.title()}
-              </Scrivito.LinkTag>
-            </li>
-          ))}
+          {I18n.t("SimpleBanner.links", {ns: "cookieBanner", returnObjects: true}).map((item, index) => 
+            <li key={index}><a href={item.url} title={item.title} target="_blank">{item.title}</a></li>
+          )} 
         </ul>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="primary" onClick={() => switchBannerMode()}>
-          {I18n.t("CookieBanner.buttons.settings", { ns: "live" })}
-        </Button>
+        <a className="select cookies link" href="#" onClick={() => switchBannerMode()}>
+          {I18n.t("buttons.settings", { ns: "cookieBanner" })}
+        </a>
         <Button variant="primary" onClick={() => acceptAll()}>
-          {I18n.t("CookieBanner.buttons.acceptAll", { ns: "live" })}
+          {I18n.t("buttons.acceptAll", { ns: "cookieBanner" })}
         </Button>
         <Button variant="primary" onClick={() => declineAll()}>
-          {I18n.t("CookieBanner.buttons.declineAll", { ns: "live" })}
+          {I18n.t("buttons.declineAll", { ns: "cookieBanner" })}
         </Button>
       </Modal.Footer>
     </Modal>

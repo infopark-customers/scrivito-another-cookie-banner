@@ -10,26 +10,26 @@ function CookieGatekeeper({ children, cookieName }) {
       <CookieDeclinedPlaceholder
         name={cookieName}
         iconClass={I18n.t(
-          `CookieBanner.CookieDeclinedPlaceholder.${cookieName}.iconClass`,
+          `CookieDeclinedPlaceholder.${cookieName}.iconClass`,
           {
-            ns: "live",
+            ns: "cookieBanner",
           }
         )}
         title={I18n.t(
-          `CookieBanner.CookieDeclinedPlaceholder.${cookieName}.title`,
+          `CookieDeclinedPlaceholder.${cookieName}.title`,
           {
-            ns: "live",
+            ns: "cookieBanner",
           }
         )}
         text={I18n.t(
-          `CookieBanner.CookieDeclinedPlaceholder.${cookieName}.text`,
+          `CookieDeclinedPlaceholder.${cookieName}.text`,
           {
-            ns: "live",
+            ns: "cookieBanner",
           }
         )}
         buttonText={I18n.t(
-          "CookieBanner.CookieDeclinedPlaceholder.buttonText",
-          { ns: "live" }
+          "CookieDeclinedPlaceholder.buttonText",
+          { ns: "cookieBanner" }
         )}
       />
     );

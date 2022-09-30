@@ -2,17 +2,10 @@ import * as React from "react";
 import * as Scrivito from "scrivito";
 import { Modal } from "react-bootstrap";
 
-function BannerHeader({ obj, closeButton = false }) {
-  const logo = obj.get("logo");
+function BannerHeader({ closeButton = false }) {
   return (
     <Modal.Header closeButton={closeButton}>
-      {logo && (
-        <Scrivito.ImageTag
-          content={logo}
-          className="img-fluid"
-          alt={logo.get("alternativeText")}
-        />
-      )}
+      {/* url && <img src={url} alt={alt} className="img-fluid" /> */}
     </Modal.Header>
   );
 }
