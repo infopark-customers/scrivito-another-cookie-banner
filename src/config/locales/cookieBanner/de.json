@@ -32,6 +32,11 @@
   },
   "cookieDefinitions": {
     "functional": {
+      "buttons": {
+        "all": {
+          "title": "Alle Cookies"
+        }
+      },
       "title": "Funktionell",
       "description": "Mit diesen Tags können wir die Nutzung der Website analysieren, um deren Leistung zu messen und zu verbessern.",
       "cookies": {

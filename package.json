@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/antonmezin/scrivito-cookier-banner#readme",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.4",
     "parse-domain": "^7.0.1"
   },
   "peerDependencies": {

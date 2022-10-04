@@ -9,18 +9,19 @@ function SingleCookieBlock({ blockName, cookieName, editable }) {
     <div className="form-check">
       <input
         className="form-check-input"
+        id={cookieName}
         type="checkbox"
         checked={!editable || isAccepted(cookieName)}
         onChange={() => switchDecision(cookieName)}
         disabled={!editable}
       />
-      <label className="form-check-label" htmlFor="flexCheckDefault">
+      <label className="form-check-label" htmlFor={cookieName}>
         {I18n.t(
           `cookieDefinitions.${blockName}.cookies.${cookieName}.title`,
           { ns: "cookieBanner" }
         )}
       </label>
-      <InformationBlock>
+      <InformationBlock cookieName={cookieName}>
         <small>
           {I18n.t(
             `cookieDefinitions.${blockName}.cookies.${cookieName}.description.title`,
