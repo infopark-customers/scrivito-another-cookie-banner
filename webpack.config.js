@@ -3,9 +3,9 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const SRC_PATH = path.join(__dirname, "src");
 
 module.exports = {
-  optimization: {
-    minimize: false
-  },
+  // optimization: {
+  //   minimize: false
+  // },
   entry: {
     index: "./src/index.js",
     cssBundle: "./src/assets/stylesheets/main.scss",

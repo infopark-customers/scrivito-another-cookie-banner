@@ -26,7 +26,7 @@ export default function Footer() {
   }
   return (
       <Modal.Footer>
-        <a className="select cookies link" href="#" onClick={() => switchBannerMode()}>
+        <a role="button" onClick={() => switchBannerMode()}>
           {I18n.t("buttons.settings", { ns: "cookieBanner" })}
         </a>
         <Button variant="primary" onClick={() => acceptAll()}>

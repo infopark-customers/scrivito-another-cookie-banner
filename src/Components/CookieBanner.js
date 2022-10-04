@@ -4,6 +4,7 @@ import { useCookieConsent } from "./CookieConsentContext";
 import Header from "./Header";
 import Body from "./Body";
 import Footer from "./Footer";
+import "../assets/main.scss";
 
 export default function CookieBanner() {
   const { 
@@ -12,9 +13,14 @@ export default function CookieBanner() {
   } = useCookieConsent();
   return (
     <Modal
-      className="cookie-banner modal-dialog-scrollable"
+      backdrop="static"
+      backdropClassName="cookie-banner-modal-bkgrd"
+      centered
+      animation={false}
+      className="cookie-banner"
       show={bannerVisibility}
       onHide={() => switchBannerMode()}
+      scrollable
     >
       <Header />
       <Body />
