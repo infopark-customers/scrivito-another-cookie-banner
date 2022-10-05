@@ -17,7 +17,7 @@ export default function CookieBanner() {
       backdropClassName="cookie-banner-modal-bkgrd"
       centered
       animation={false}
-      className="cookie-banner"
+      className="cookie-banner cookie-banner-iso"
       show={bannerVisibility}
       onHide={() => switchBannerMode()}
       scrollable

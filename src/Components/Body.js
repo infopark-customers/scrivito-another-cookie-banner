@@ -16,7 +16,7 @@ export default function Body() {
       <Modal.Body>
         <h5>{I18n.t("settings.title", { ns: "cookieBanner" })}</h5>
         <div className="sm-white-space" />
-        <Accordion className="accordion">
+        <Accordion>
           {cookieBlocks().map((item, index) => (
             <CookieTypeBlock
               key={`c-${index}`}

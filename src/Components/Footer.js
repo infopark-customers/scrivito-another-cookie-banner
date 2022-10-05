@@ -15,10 +15,10 @@ export default function Footer() {
   if (isExtendedMode()) {
     return (
       <Modal.Footer>
-        <Button variant="primary" onClick={() => setBannerVisibility(false)}>
+        <Button variant="primary" onClick={() => setBannerVisibility(false)} className="btn-cta">
           {I18n.t("buttons.saveAndClose", { ns: "cookieBanner" })}
         </Button>
-        <Button variant="primary" onClick={() => acceptAll()}>
+        <Button variant="primary" onClick={() => acceptAll()} className="btn-cta">
           {I18n.t("buttons.acceptAll", { ns: "cookieBanner" })}
         </Button>
       </Modal.Footer>
@@ -26,13 +26,13 @@ export default function Footer() {
   }
   return (
       <Modal.Footer>
-        <a role="button" onClick={() => switchBannerMode()}>
+        <a role="button" onClick={() => switchBannerMode()} href="javascript: void()">
           {I18n.t("buttons.settings", { ns: "cookieBanner" })}
         </a>
-        <Button variant="primary" onClick={() => acceptAll()}>
+        <Button variant="primary" onClick={() => acceptAll()} className="btn-cta">
           {I18n.t("buttons.acceptAll", { ns: "cookieBanner" })}
         </Button>
-        <Button variant="primary" onClick={() => declineAll()}>
+        <Button variant="primary" onClick={() => declineAll()} className="btn-cta">
           {I18n.t("buttons.declineAll", { ns: "cookieBanner" })}
         </Button>
       </Modal.Footer>
