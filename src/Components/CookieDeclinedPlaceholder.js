@@ -16,7 +16,7 @@ function CookieDeclinedPlaceholder({
         <i className={iconClass} />
         <h5>{title}</h5>
         <p>{text}</p>
-        <Button variant="primary" onClick={() => switchDecision(name)}>
+        <Button variant="primary" className="btn-cta" onClick={() => switchDecision(name)}>
           {buttonText}
         </Button>
       </div>
