@@ -6,13 +6,16 @@ import I18n from "../config/i18n";
 
 const CookieConsentContext = React.createContext({});
 
-export function CookieConsentProvider({ cookieConfig, logoUrl,  children, language, translations }) {
+export function CookieConsentProvider({ cookieConfig, logoUrl,  children, language, translations, inEditorMode }) {
   const cConfig = cookieConfig || defaultConfig;
+  console.log("cConfig:", cConfig);
   const COOKIE_NAME = cConfig.name || defaultConfig.name;
   const ACCEPTED = "accepted";
   const DECLINED = "declined";
   const EXTENDED_MODE = "expanded";
   const SIMPLE_MODE="simple";
+
+  const [cookies, setCookie] = useCookies([COOKIE_NAME]);
   if (language && I18n.resolvedLanguage !== language) {
     I18n.language = language;
   }
@@ -22,15 +25,19 @@ export function CookieConsentProvider({ cookieConfig, logoUrl,  children, langua
     })
   }
 
-  const [cookies, setCookie] = useCookies([COOKIE_NAME]);
 
   const [bannerVisibility, setBannerVisibility] = React.useState(false);
+
   const [cookieConsentChoice, setCookieConsentChoice] = React.useState(
     cookies[COOKIE_NAME] || {}
   );
   const [bannerMode, setBannerMode] = React.useState(SIMPLE_MODE);
 
   React.useEffect(() => {
+    if (inEditorMode) {
+      setDecisionForAllCookies(ACCEPTED);
+      return;
+    }
     if (!cookies[COOKIE_NAME]) {
       setBannerVisibility(true);
     }
@@ -94,6 +101,12 @@ export function CookieConsentProvider({ cookieConfig, logoUrl,  children, langua
   const cookieTypeNames = (typeName) =>
     cConfig.blocks.find((item) => item.name === typeName)?.cookies || [];
 
+  const cookieKeysForName = (cookieName) => {
+    console.log("cookieKeysForName:", cConfig, cConfig.technicalNames, cookieName)
+    return cConfig.technicalNames ? [cConfig.technicalNames[cookieName]].flat().filter(n => n) : []
+  }
+
+
   return (
     <CookieConsentContext.Provider
       value={{
@@ -110,6 +123,7 @@ export function CookieConsentProvider({ cookieConfig, logoUrl,  children, langua
         switchBannerMode: () => switchBannerMode(),
         isExtendedMode: () => bannerMode === EXTENDED_MODE,
         isCookieTypeAccepted: (typeName) => isCookieTypeAccepted(typeName),
+        cookieKeysForName: (cookieName) => cookieKeysForName(cookieName),
         switchCookiesOfType: (typeName, shoudAccept) =>
           setCookieDecision(
             cookieTypeNames(typeName),

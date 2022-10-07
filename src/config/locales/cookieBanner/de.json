@@ -66,6 +66,13 @@
             "title": "Authentifizierung",
             "text": ""
           }
+        },
+        "cookie_consent": {
+          "title": "Cookie-Zustimmung",
+          "description": {
+            "title": "Cookie-Zustimmung",
+            "text": "In diesem Cookie wird Ihre Zustimmung über die Verwendung der Cookies gepeichert."
+          }
         }
       }
     }

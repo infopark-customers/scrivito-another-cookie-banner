@@ -1,5 +1,11 @@
 {
-  "name": "_bima_cnsnt",
+  "name": "_bima_cookie_consent",
+  "technicalNames": {
+    "gmap": [],
+    "vimeo": ["vimeo"],
+    "authentication": ["_bima_auth"],
+    "cookie_consent": ["_bima_cookie_consent"]
+  },
   "blocks": [
     {
       "name": "functional",
@@ -15,7 +21,8 @@
       "preset": "accepted",
       "editable": false,
       "cookies": [
-        "authentication"
+        "authentication",
+        "cookie_consent"
       ]
     }
   ]

@@ -3,7 +3,8 @@ import InformationBlock from "./InformationBlock";
 import { useCookieConsent } from "./CookieConsentContext";
 
 function SingleCookieBlock({ blockName, cookieName, editable }) {
-  const { isAccepted, switchDecision, I18n } = useCookieConsent();
+  const { isAccepted, switchDecision, I18n, cookieKeysForName } = useCookieConsent();
+  const cookieKeys = cookieKeysForName(cookieName);
 
   return (
     <div className="form-check">
@@ -20,8 +21,9 @@ function SingleCookieBlock({ blockName, cookieName, editable }) {
           `cookieDefinitions.${blockName}.cookies.${cookieName}.title`,
           { ns: "cookieBanner" }
         )}
+        {cookieKeys.length > 0 && <span>{cookieKeys.join(", ")}</span>}
       </label>
-      <InformationBlock cookieName={cookieName}>
+      <InformationBlock cookieName={cookieName} disabled={!editable}>
         <small>
           {I18n.t(
             `cookieDefinitions.${blockName}.cookies.${cookieName}.description.title`,

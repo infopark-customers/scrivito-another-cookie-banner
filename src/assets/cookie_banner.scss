@@ -119,6 +119,15 @@
           }
           .form-check-label {
             margin-right: 4.5rem;
+            span::before {
+              content: "( ";
+            }
+            span::after {
+              content: " )";
+            }
+            span {
+              margin-left: 1em;
+            }
           }
         }
         .accordion.accordion-info {
