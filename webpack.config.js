@@ -8,7 +8,7 @@ module.exports = {
   // },
   entry: {
     index: "./src/index.js",
-    cssBundle: "./src/assets/stylesheets/main.scss",
+    cssBundle: "./src/assets/main.scss",
   },
   module: {
     rules: [
@@ -79,7 +79,7 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     publicPath: path.resolve(__dirname, "dist"),
     libraryTarget: "umd",
-    library: "scrivito-cookie-banner",
+    library: "scrivito-another-cookie-banner",
     globalObject: "this",
   },
   mode: "production",

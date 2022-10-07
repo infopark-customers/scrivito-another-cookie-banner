@@ -1,8 +1,8 @@
 {
-  "name": "scrivito-cookie-banner",
+  "name": "scrivito-another-cookie-banner",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "webpack",
     "build-dev": "npm ci && npm run build && rm -rf node_modules",
@@ -54,9 +54,11 @@
     "eslint-plugin-promise": "^6.0.1",
     "eslint-plugin-react": "^7.31.8",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "file-loader": "^6.2.0",
     "mini-css-extract-plugin": "^2.6.1",
     "sass": "^1.55.0",
     "sass-loader": "^13.1.0",
+    "url-loader": "^4.1.1",
     "webpack-cli": "^4.10.0"
   }
 }
