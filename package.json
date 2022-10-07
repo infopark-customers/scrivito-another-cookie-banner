@@ -1,11 +1,12 @@
 {
   "name": "scrivito-another-cookie-banner",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "description": "",
   "main": "dist/index.js",
+  "style": "dist/index.css",
   "scripts": {
-    "publish": "rm -rf dist && npm run build && npm publish",
-    "build": "webpack",
+    "publish": "npm ci && npm run build && npm publish",
+    "build": "rm -rf dist && webpack",
     "build-dev": "npm ci && npm run build && rm -rf node_modules",
     "eslint": "eslint --max-warnings 0 src/",
     "eslint-fix": "eslint --fix --max-warnings 0 src/"
@@ -14,7 +15,10 @@
     "type": "git",
     "url": "git+https://github.com/antonmezin/scrivito-cookier-banner.git"
   },
-  "keywords": [],
+  "keywords": [
+    "cookie",
+    "scrivito"
+  ],
   "author": " <Anton Mezin> (anton.mezin@justrelate.com)",
   "license": "MIT",
   "bugs": {
@@ -22,15 +26,15 @@
   },
   "homepage": "https://github.com/antonmezin/scrivito-cookier-banner#readme",
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.4",
-    "bootstrap": "^5.2.2",
-    "parse-domain": "^7.0.1"
+    "bootstrap": "^5.2.2"
   },
   "peerDependencies": {
+    "@fortawesome/fontawesome-free": "*",
     "classnames": "*",
     "i18next": "*",
     "lodash": "*",
     "lodash-es": "*",
+    "parse-domain": "*",
     "react": "^17.0.2",
     "react-bootstrap": "*",
     "react-cookie": "*",
@@ -57,6 +61,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "file-loader": "^6.2.0",
     "mini-css-extract-plugin": "^2.6.1",
+    "parse-domain": "^7.0.1",
     "sass": "^1.55.0",
     "sass-loader": "^13.1.0",
     "url-loader": "^4.1.1",
