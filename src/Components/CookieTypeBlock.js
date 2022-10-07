@@ -1,12 +1,12 @@
 import * as React from "react";
 import { Accordion } from "react-bootstrap";
 import className from "classnames";
-import I18n from "../../config/i18n";
 import SingleCookieBlock from "./SingleCookieBlock";
 import { useCookieConsent } from "./CookieConsentContext";
 
 function CookieTypeBlock({ cookieDescription, eventKey }) {
-  const { switchCookiesOfType, isCookieTypeAccepted } = useCookieConsent();
+  const { switchCookiesOfType, isCookieTypeAccepted, I18n } =
+    useCookieConsent();
   const { name: typeName, cookies, editable } = cookieDescription;
 
   return (
@@ -14,13 +14,13 @@ function CookieTypeBlock({ cookieDescription, eventKey }) {
       <Accordion.Header as="div">
         <span className="header-text-wrapper">
           <h6>
-            {I18n.t(`CookieBanner.cookieDefinitions.${typeName}.title`, {
-              ns: "live",
+            {I18n.t(`cookieDefinitions.${typeName}.title`, {
+              ns: "cookieBanner",
             })}
           </h6>
           <p>
-            {I18n.t(`CookieBanner.cookieDefinitions.${typeName}.description`, {
-              ns: "live",
+            {I18n.t(`cookieDefinitions.${typeName}.description`, {
+              ns: "cookieBanner",
             })}
           </p>
         </span>
@@ -30,15 +30,13 @@ function CookieTypeBlock({ cookieDescription, eventKey }) {
           >
             <span
               className="d-none"
-              title={I18n.t(
-                `CookieBanner.cookieDefinitions.${typeName}.buttons.all.title`,
-                { ns: "live" }
-              )}
+              title={I18n.t(`cookieDefinitions.${typeName}.buttons.all.title`, {
+                ns: "cookieBanner",
+              })}
             >
-              {I18n.t(
-                `CookieBanner.cookieDefinitions.${typeName}.buttons.all.title`,
-                { ns: "live" }
-              )}
+              {I18n.t(`cookieDefinitions.${typeName}.buttons.all.title`, {
+                ns: "cookieBanner",
+              })}
             </span>
             <input
               type="checkbox"

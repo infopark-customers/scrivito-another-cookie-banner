@@ -1,42 +1,27 @@
 import * as React from "react";
-import * as Scrivito from "scrivito";
-import SimpleCookieBanner from "./SimpleCookieBanner";
-import ExtendedCookieBanner from "./ExtendedCookieBanner";
+import { Modal } from "react-bootstrap";
 import { useCookieConsent } from "./CookieConsentContext";
+import Header from "./Header";
+import Body from "./Body";
+import Footer from "./Footer";
+import "../assets/main.scss";
 
-function CookieBanner({ cookieConfig }) {
-  const {
-    bannerVisibility,
-    setBannerVisibility,
-    acceptAll,
-    declineAll,
-    isExtendedMode,
-    switchBannerMode,
-  } = useCookieConsent();
-
-  const [obj] = Scrivito.Obj.onAllSites()
-    .where("_objClass", "equals", "CookieConfig")
-    .take(1);
-
-  if (!obj) {
-    return null;
-  }
-  return isExtendedMode() ? (
-    <ExtendedCookieBanner
-      cookieConfig={cookieConfig}
+export default function CookieBanner() {
+  const { bannerVisibility, switchBannerMode } = useCookieConsent();
+  return (
+    <Modal
+      backdrop="static"
+      backdropClassName="cookie-banner-modal-bkgrd"
+      centered
+      animation={false}
+      className="cookie-banner cookie-banner-iso"
       show={bannerVisibility}
       onHide={() => switchBannerMode()}
-      obj={obj}
-    />
-  ) : (
-    <SimpleCookieBanner
-      obj={obj}
-      onDecline={() => declineAll()}
-      onAccept={() => acceptAll()}
-      show={bannerVisibility}
-      onHide={() => setBannerVisibility(false)}
-    />
+      scrollable
+    >
+      <Header />
+      <Body />
+      <Footer />
+    </Modal>
   );
 }
-
-export default Scrivito.connect(CookieBanner);
