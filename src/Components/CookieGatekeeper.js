@@ -8,28 +8,18 @@ function CookieGatekeeper({ children, cookieName }) {
     return (
       <CookieDeclinedPlaceholder
         name={cookieName}
-        iconClass={I18n.t(
-          `CookieDeclinedPlaceholder.${cookieName}.iconClass`,
-          {
-            ns: "cookieBanner",
-          }
-        )}
-        title={I18n.t(
-          `CookieDeclinedPlaceholder.${cookieName}.title`,
-          {
-            ns: "cookieBanner",
-          }
-        )}
-        text={I18n.t(
-          `CookieDeclinedPlaceholder.${cookieName}.text`,
-          {
-            ns: "cookieBanner",
-          }
-        )}
-        buttonText={I18n.t(
-          "CookieDeclinedPlaceholder.buttonText",
-          { ns: "cookieBanner" }
-        )}
+        iconClass={I18n.t(`CookieDeclinedPlaceholder.${cookieName}.iconClass`, {
+          ns: "cookieBanner",
+        })}
+        title={I18n.t(`CookieDeclinedPlaceholder.${cookieName}.title`, {
+          ns: "cookieBanner",
+        })}
+        text={I18n.t(`CookieDeclinedPlaceholder.${cookieName}.text`, {
+          ns: "cookieBanner",
+        })}
+        buttonText={I18n.t("CookieDeclinedPlaceholder.buttonText", {
+          ns: "cookieBanner",
+        })}
       />
     );
   }

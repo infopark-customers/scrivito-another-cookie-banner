@@ -7,10 +7,7 @@ import Footer from "./Footer";
 import "../assets/main.scss";
 
 export default function CookieBanner() {
-  const { 
-    bannerVisibility, 
-    switchBannerMode, 
-  } = useCookieConsent();
+  const { bannerVisibility, switchBannerMode } = useCookieConsent();
   return (
     <Modal
       backdrop="static"
@@ -26,7 +23,5 @@ export default function CookieBanner() {
       <Body />
       <Footer />
     </Modal>
-  )
+  );
 }
-
-

@@ -20,7 +20,7 @@ I18n.init({
   ns: ["cookieBanner"],
   defaultNS: "cookieBanner",
   interpolation: {
-    escapeValue: false, 
+    escapeValue: false,
   },
 });
 

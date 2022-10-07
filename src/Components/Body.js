@@ -1,15 +1,10 @@
-
 import * as React from "react";
-import { Modal, Button, Accordion } from "react-bootstrap";
+import { Modal, Accordion } from "react-bootstrap";
 import CookieTypeBlock from "./CookieTypeBlock";
 import { useCookieConsent } from "./CookieConsentContext";
 
 export default function Body() {
-  const { 
-    cookieBlocks, 
-    isExtendedMode,
-    I18n,
-  } = useCookieConsent();
+  const { cookieBlocks, isExtendedMode, I18n } = useCookieConsent();
 
   if (isExtendedMode()) {
     return (
@@ -26,19 +21,33 @@ export default function Body() {
           ))}
         </Accordion>
       </Modal.Body>
-    )
+    );
   }
   return (
     <Modal.Body>
-      <h5>
-        {I18n.t("SimpleBanner.title", {ns: "cookieBanner"})}
-      </h5>
-      <div dangerouslySetInnerHTML={{ __html: I18n.t("SimpleBanner.text", {ns: "cookieBanner"})}} />
+      <h5>{I18n.t("SimpleBanner.title", { ns: "cookieBanner" })}</h5>
+      <div
+        dangerouslySetInnerHTML={{
+          __html: I18n.t("SimpleBanner.text", { ns: "cookieBanner" }),
+        }}
+      />
       <ul className="inline-no-list-type">
-        {I18n.t("SimpleBanner.links", {ns: "cookieBanner", returnObjects: true}).map((item, index) => 
-          <li key={index}><a href={item.url} title={item.title} target="_blank">{item.title}</a></li>
-        )} 
+        {I18n.t("SimpleBanner.links", {
+          ns: "cookieBanner",
+          returnObjects: true,
+        }).map((item, index) => (
+          <li key={index}>
+            <a
+              href={item.url}
+              title={item.title}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {item.title}
+            </a>
+          </li>
+        ))}
       </ul>
     </Modal.Body>
-  )
+  );
 }

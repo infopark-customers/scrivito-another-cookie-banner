@@ -6,14 +6,20 @@ import I18n from "../config/i18n";
 
 const CookieConsentContext = React.createContext({});
 
-export function CookieConsentProvider({ cookieConfig, logoUrl,  children, language, translations, inEditorMode }) {
+export function CookieConsentProvider({
+  cookieConfig,
+  logoUrl,
+  children,
+  language,
+  translations,
+  inEditorMode,
+}) {
   const cConfig = cookieConfig || defaultConfig;
-  console.log("cConfig:", cConfig);
   const COOKIE_NAME = cConfig.name || defaultConfig.name;
   const ACCEPTED = "accepted";
   const DECLINED = "declined";
   const EXTENDED_MODE = "expanded";
-  const SIMPLE_MODE="simple";
+  const SIMPLE_MODE = "simple";
 
   const [cookies, setCookie] = useCookies([COOKIE_NAME]);
   if (language && I18n.resolvedLanguage !== language) {
@@ -21,10 +27,15 @@ export function CookieConsentProvider({ cookieConfig, logoUrl,  children, langua
   }
   if (translations) {
     Object.keys(translations).forEach((lang) => {
-      I18n.addResourceBundle(lang, "cookieBanner", translations[lang], true, true);
-    })
+      I18n.addResourceBundle(
+        lang,
+        "cookieBanner",
+        translations[lang],
+        true,
+        true
+      );
+    });
   }
-
 
   const [bannerVisibility, setBannerVisibility] = React.useState(false);
 
@@ -33,15 +44,20 @@ export function CookieConsentProvider({ cookieConfig, logoUrl,  children, langua
   );
   const [bannerMode, setBannerMode] = React.useState(SIMPLE_MODE);
 
+  const setDecisionForAllCookies = (decision) => {
+    setCookieDecision(editableCookies, decision);
+    setBannerVisibility(false);
+  };
+
   React.useEffect(() => {
     if (inEditorMode) {
-      setDecisionForAllCookies(ACCEPTED);
+      setBannerVisibility(false);
       return;
     }
     if (!cookies[COOKIE_NAME]) {
       setBannerVisibility(true);
     }
-  }, [cookies]);
+  }, [cookies, COOKIE_NAME, inEditorMode]);
 
   const editableCookies = cConfig.blocks.flatMap((item) =>
     item.editable ? item.cookies : []
@@ -77,18 +93,13 @@ export function CookieConsentProvider({ cookieConfig, logoUrl,  children, langua
     return current === ACCEPTED;
   };
 
-  const setDecisionForAllCookies = (decision) => {
-    setCookieDecision(editableCookies, decision);
-    setBannerVisibility(false);
-  };
-
   const switchDecision = (name) => {
     const current = cookieConsentChoice[name]?.decision;
     setCookieDecision([name], current === ACCEPTED ? DECLINED : ACCEPTED);
   };
 
   const switchBannerMode = () => {
-    setBannerMode(bannerMode === EXTENDED_MODE ? SIMPLE_MODE : EXTENDED_MODE );
+    setBannerMode(bannerMode === EXTENDED_MODE ? SIMPLE_MODE : EXTENDED_MODE);
   };
 
   const isCookieTypeAccepted = (typeName) => {
@@ -101,11 +112,10 @@ export function CookieConsentProvider({ cookieConfig, logoUrl,  children, langua
   const cookieTypeNames = (typeName) =>
     cConfig.blocks.find((item) => item.name === typeName)?.cookies || [];
 
-  const cookieKeysForName = (cookieName) => {
-    console.log("cookieKeysForName:", cConfig, cConfig.technicalNames, cookieName)
-    return cConfig.technicalNames ? [cConfig.technicalNames[cookieName]].flat().filter(n => n) : []
-  }
-
+  const cookieKeysForName = (cookieName) =>
+    cConfig.technicalNames
+      ? [cConfig.technicalNames[cookieName]].flat().filter((n) => n)
+      : [];
 
   return (
     <CookieConsentContext.Provider
@@ -124,10 +134,10 @@ export function CookieConsentProvider({ cookieConfig, logoUrl,  children, langua
         isExtendedMode: () => bannerMode === EXTENDED_MODE,
         isCookieTypeAccepted: (typeName) => isCookieTypeAccepted(typeName),
         cookieKeysForName: (cookieName) => cookieKeysForName(cookieName),
-        switchCookiesOfType: (typeName, shoudAccept) =>
+        switchCookiesOfType: (typeName, shouldAccept) =>
           setCookieDecision(
             cookieTypeNames(typeName),
-            shoudAccept ? ACCEPTED : DECLINED
+            shouldAccept ? ACCEPTED : DECLINED
           ),
       }}
     >

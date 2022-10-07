@@ -15,7 +15,9 @@ function InformationBlock({ children, cookieName, disabled }) {
       </button>
       <div
         id={`infoCollapseOne-${cookieName}`}
-        className={`accordion-collapse collapse ${open ? "show" : ""} ${disabled ? 'opacity-50' : ''}`}
+        className={`accordion-collapse collapse ${open ? "show" : ""} ${
+          disabled ? "opacity-50" : ""
+        }`}
       >
         <div className="accordion-body">{children}</div>
       </div>

@@ -5,7 +5,8 @@ import SingleCookieBlock from "./SingleCookieBlock";
 import { useCookieConsent } from "./CookieConsentContext";
 
 function CookieTypeBlock({ cookieDescription, eventKey }) {
-  const { switchCookiesOfType, isCookieTypeAccepted, I18n } = useCookieConsent();
+  const { switchCookiesOfType, isCookieTypeAccepted, I18n } =
+    useCookieConsent();
   const { name: typeName, cookies, editable } = cookieDescription;
 
   return (
@@ -29,15 +30,13 @@ function CookieTypeBlock({ cookieDescription, eventKey }) {
           >
             <span
               className="d-none"
-              title={I18n.t(
-                `cookieDefinitions.${typeName}.buttons.all.title`,
-                { ns: "cookieBanner" }
-              )}
+              title={I18n.t(`cookieDefinitions.${typeName}.buttons.all.title`, {
+                ns: "cookieBanner",
+              })}
             >
-              {I18n.t(
-                `cookieDefinitions.${typeName}.buttons.all.title`,
-                { ns: "cookieBanner" }
-              )}
+              {I18n.t(`cookieDefinitions.${typeName}.buttons.all.title`, {
+                ns: "cookieBanner",
+              })}
             </span>
             <input
               type="checkbox"

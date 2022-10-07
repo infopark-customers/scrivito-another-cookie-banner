@@ -1,19 +1,20 @@
 {
   "name": "scrivito-cookie-banner",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "",
   "main": "src/index.js",
   "scripts": {
     "build": "webpack",
     "build-dev": "npm ci && npm run build && rm -rf node_modules",
-    "eslint": "eslint --max-warnings 0 src/"
+    "eslint": "eslint --max-warnings 0 src/",
+    "eslint-fix": "eslint --fix --max-warnings 0 src/"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/antonmezin/scrivito-cookier-banner.git"
   },
   "keywords": [],
-  "author": " <Your Name> (http://example.com/)",
+  "author": " <Anton Mezin> (anton.mezin@justrelate.com)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/antonmezin/scrivito-cookier-banner/issues"
@@ -26,14 +27,13 @@
   },
   "peerDependencies": {
     "classnames": "*",
-    "i18next": "*",
+    "i18next": "^21.10.0",
     "lodash": "*",
     "lodash-es": "*",
     "react": "^17.0.2",
     "react-bootstrap": "*",
     "react-cookie": "*",
-    "react-dom": "^17.0.2",
-    "scrivito": "*"
+    "react-dom": "^17.0.2"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.19.3",
@@ -42,10 +42,15 @@
     "classnames": "^2.3.2",
     "css-loader": "^6.7.1",
     "eslint": "^8.24.0",
+    "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-react-app": "^7.0.1",
     "eslint-config-standard": "^17.0.0",
+    "eslint-import-resolver-webpack": "^0.13.2",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-n": "^15.3.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-promise": "^6.0.1",
     "eslint-plugin-react": "^7.31.8",
     "eslint-plugin-react-hooks": "^4.6.0",
