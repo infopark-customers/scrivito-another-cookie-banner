@@ -1,9 +1,10 @@
 {
   "name": "scrivito-another-cookie-banner",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
+    "publish": "npm run build && npm publish",
     "build": "webpack",
     "build-dev": "npm ci && npm run build && rm -rf node_modules",
     "eslint": "eslint --max-warnings 0 src/",
@@ -27,7 +28,7 @@
   },
   "peerDependencies": {
     "classnames": "*",
-    "i18next": "^21.10.0",
+    "i18next": "*",
     "lodash": "*",
     "lodash-es": "*",
     "react": "^17.0.2",
