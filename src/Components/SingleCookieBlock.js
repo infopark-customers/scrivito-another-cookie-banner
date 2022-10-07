@@ -1,37 +1,39 @@
 import * as React from "react";
 import InformationBlock from "./InformationBlock";
-import I18n from "../../config/i18n";
 import { useCookieConsent } from "./CookieConsentContext";
 
 function SingleCookieBlock({ blockName, cookieName, editable }) {
-  const { isAccepted, switchDecision } = useCookieConsent();
+  const { isAccepted, switchDecision, I18n, cookieKeysForName } =
+    useCookieConsent();
+  const cookieKeys = cookieKeysForName(cookieName);
 
   return (
     <div className="form-check">
       <input
         className="form-check-input"
+        id={cookieName}
         type="checkbox"
         checked={!editable || isAccepted(cookieName)}
         onChange={() => switchDecision(cookieName)}
         disabled={!editable}
       />
-      <label className="form-check-label" htmlFor="flexCheckDefault">
-        {I18n.t(
-          `CookieBanner.cookieDefinitions.${blockName}.cookies.${cookieName}.title`,
-          { ns: "live" }
-        )}
+      <label className="form-check-label" htmlFor={cookieName}>
+        {I18n.t(`cookieDefinitions.${blockName}.cookies.${cookieName}.title`, {
+          ns: "cookieBanner",
+        })}
+        {cookieKeys.length > 0 && <span>{cookieKeys.join(", ")}</span>}
       </label>
-      <InformationBlock>
+      <InformationBlock cookieName={cookieName} disabled={!editable}>
         <small>
           {I18n.t(
-            `CookieBanner.cookieDefinitions.${blockName}.cookies.${cookieName}.description.title`,
-            { ns: "live" }
+            `cookieDefinitions.${blockName}.cookies.${cookieName}.description.title`,
+            { ns: "cookieBanner" }
           )}
         </small>
         <p>
           {I18n.t(
-            `CookieBanner.cookieDefinitions.${blockName}.cookies.${cookieName}.description.text`,
-            { ns: "live" }
+            `cookieDefinitions.${blockName}.cookies.${cookieName}.description.text`,
+            { ns: "cookieBanner" }
           )}
         </p>
       </InformationBlock>

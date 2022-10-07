@@ -1,0 +1,19 @@
+//***** cookie banner styles*****//
+$light-grey: rgb(204, 204, 204);
+$black: rgb(0, 0, 0);
+
+//* fonts *//
+$font-family-sans: "BundesSansWeb-Regular", sans-serif !important;
+$font-family-sans-serif-bold: "BundesSerifWeb-Bold", sans-serif !important;
+$font-family-sans-serif-reg: "BundesSerifWeb-Regular", sans-serif !important;
+$font-family-sans-bold: "BundesSansWeb-Bold", sans-serif !important;
+$font-base-size: 16px !important;
+
+// @import "./modal-fix";
+.show {
+  visibility: visible;
+}
+.collapse.show {
+  height: auto;
+}
+@import "cookie_banner";

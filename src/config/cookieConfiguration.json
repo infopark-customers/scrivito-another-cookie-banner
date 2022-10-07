@@ -1,0 +1,29 @@
+{
+  "name": "_bima_cookie_consent",
+  "technicalNames": {
+    "gmap": [],
+    "vimeo": ["vimeo"],
+    "authentication": ["_bima_auth"],
+    "cookie_consent": ["_bima_cookie_consent"]
+  },
+  "blocks": [
+    {
+      "name": "functional",
+      "preset": "declined",
+      "editable": true,
+      "cookies": [
+        "gmap",
+        "vimeo"
+      ]
+    },
+    {
+      "name": "essential",
+      "preset": "accepted",
+      "editable": false,
+      "cookies": [
+        "authentication",
+        "cookie_consent"
+      ]
+    }
+  ]
+}

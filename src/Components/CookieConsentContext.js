@@ -1,28 +1,65 @@
 import * as React from "react";
 import { useCookies } from "react-cookie";
+import domainName from "../utils/domainName";
+import defaultConfig from "../config/cookieConfiguration.json";
+import I18n from "../config/i18n";
 
 const CookieConsentContext = React.createContext({});
 
-export function CookieConsentProvider({ cookieConfig, children }) {
-  const COOKIE_NAME = "_bima_cncnt";
+export function CookieConsentProvider({
+  cookieConfig,
+  logoUrl,
+  children,
+  language,
+  translations,
+  inEditorMode,
+}) {
+  const cConfig = cookieConfig || defaultConfig;
+  const COOKIE_NAME = cConfig.name || defaultConfig.name;
   const ACCEPTED = "accepted";
   const DECLINED = "declined";
+  const EXTENDED_MODE = "expanded";
+  const SIMPLE_MODE = "simple";
 
   const [cookies, setCookie] = useCookies([COOKIE_NAME]);
+  if (language && I18n.resolvedLanguage !== language) {
+    I18n.language = language;
+  }
+  if (translations) {
+    Object.keys(translations).forEach((lang) => {
+      I18n.addResourceBundle(
+        lang,
+        "cookieBanner",
+        translations[lang],
+        true,
+        true
+      );
+    });
+  }
+
   const [bannerVisibility, setBannerVisibility] = React.useState(false);
 
   const [cookieConsentChoice, setCookieConsentChoice] = React.useState(
     cookies[COOKIE_NAME] || {}
   );
-  const [bannerMode, setBannerMode] = React.useState("simple");
+  const [bannerMode, setBannerMode] = React.useState(SIMPLE_MODE);
+
+  const setDecisionForAllCookies = (decision) => {
+    setCookieDecision(editableCookies, decision);
+    setBannerVisibility(false);
+  };
 
   React.useEffect(() => {
+    if (inEditorMode) {
+      setBannerVisibility(false);
+      return;
+    }
     if (!cookies[COOKIE_NAME]) {
       setBannerVisibility(true);
     }
-  }, [cookies]);
+  }, [cookies, COOKIE_NAME, inEditorMode]);
 
-  const editableCookies = cookieConfig.flatMap((item) =>
+  const editableCookies = cConfig.blocks.flatMap((item) =>
     item.editable ? item.cookies : []
   );
 
@@ -32,8 +69,9 @@ export function CookieConsentProvider({ cookieConfig, children }) {
       path: "/",
       expires: new Date(new Date().setFullYear(new Date().getFullYear() + 1)),
     };
-    if (window.location.hostname !== "localhost") {
-      options.domain = ".bundesimmobilien.de";
+    const dName = domainName(window.location.hostname);
+    if (dName) {
+      options.domain = dName;
     }
     setCookie(COOKIE_NAME, value, options);
   };
@@ -55,18 +93,13 @@ export function CookieConsentProvider({ cookieConfig, children }) {
     return current === ACCEPTED;
   };
 
-  const setDecisionForAllCookies = (decision) => {
-    setCookieDecision(editableCookies, decision);
-    setBannerVisibility(false);
-  };
-
   const switchDecision = (name) => {
     const current = cookieConsentChoice[name]?.decision;
     setCookieDecision([name], current === ACCEPTED ? DECLINED : ACCEPTED);
   };
 
   const switchBannerMode = () => {
-    setBannerMode(bannerMode === "extended" ? "simple" : "extended");
+    setBannerMode(bannerMode === EXTENDED_MODE ? SIMPLE_MODE : EXTENDED_MODE);
   };
 
   const isCookieTypeAccepted = (typeName) => {
@@ -77,11 +110,19 @@ export function CookieConsentProvider({ cookieConfig, children }) {
   };
 
   const cookieTypeNames = (typeName) =>
-    cookieConfig.find((item) => item.name === typeName)?.cookies || [];
+    cConfig.blocks.find((item) => item.name === typeName)?.cookies || [];
+
+  const cookieKeysForName = (cookieName) =>
+    cConfig.technicalNames
+      ? [cConfig.technicalNames[cookieName]].flat().filter((n) => n)
+      : [];
 
   return (
     <CookieConsentContext.Provider
       value={{
+        I18n,
+        logoUrl,
+        cookieBlocks: () => cConfig.blocks,
         cookieConsentChoice,
         bannerVisibility,
         acceptAll: () => setDecisionForAllCookies(ACCEPTED),
@@ -90,12 +131,13 @@ export function CookieConsentProvider({ cookieConfig, children }) {
         switchDecision: (cookieName) => switchDecision(cookieName),
         setBannerVisibility: (choice) => setBannerVisibility(choice),
         switchBannerMode: () => switchBannerMode(),
-        isExtendedMode: () => bannerMode === "extended",
+        isExtendedMode: () => bannerMode === EXTENDED_MODE,
         isCookieTypeAccepted: (typeName) => isCookieTypeAccepted(typeName),
-        switchCookiesOfType: (typeName, shoudAccept) =>
+        cookieKeysForName: (cookieName) => cookieKeysForName(cookieName),
+        switchCookiesOfType: (typeName, shouldAccept) =>
           setCookieDecision(
             cookieTypeNames(typeName),
-            shoudAccept ? ACCEPTED : DECLINED
+            shouldAccept ? ACCEPTED : DECLINED
           ),
       }}
     >

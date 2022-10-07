@@ -11,12 +11,16 @@ function CookieDeclinedPlaceholder({
 }) {
   const { switchDecision } = useCookieConsent();
   return (
-    <div className="map-container-message">
+    <div className="map-container-message cookie-declined-placeholder">
       <div>
         <i className={iconClass} />
         <h5>{title}</h5>
         <p>{text}</p>
-        <Button variant="primary" onClick={() => switchDecision(name)}>
+        <Button
+          variant="primary"
+          className="btn-cta"
+          onClick={() => switchDecision(name)}
+        >
           {buttonText}
         </Button>
       </div>
