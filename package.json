@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "publish": "npm run build && npm publish",
+    "publish": "rm -rf dist && npm run build && npm publish",
     "build": "webpack",
     "build-dev": "npm ci && npm run build && rm -rf node_modules",
     "eslint": "eslint --max-warnings 0 src/",
