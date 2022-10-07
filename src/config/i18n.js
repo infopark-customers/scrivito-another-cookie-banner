@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-unresolved
 import I18n from "i18next";
 
 import de from "./locales/cookieBanner/de.json";
