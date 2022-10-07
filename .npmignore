@@ -1,0 +1,10 @@
+node_modules
+src
+tmp
+.env
+.vscode
+.DS_Store
+stats.json
+cookie-banner-screenshot.png
+webpack.config.js
+.eslintrc
