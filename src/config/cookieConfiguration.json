@@ -3,8 +3,8 @@
   "technicalNames": {
     "gmap": [],
     "vimeo": ["vimeo"],
-    "authentication": ["_bima_auth"],
-    "cookie_consent": ["_bima_cookie_consent"]
+    "cookie_consent": ["_bima_cookie_consent"],
+    "authentication": ["_bima_doorkeeper_session", "rack.session"]
   },
   "blocks": [
     {

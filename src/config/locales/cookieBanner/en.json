@@ -1,4 +1,7 @@
 {
+  "BannerHeader": {
+    "logoAlt": "Logo von BImA"
+  },
   "CookieDeclinedPlaceholder": {
     "buttonText": "Cookies zulassen",
     "gmap": {
@@ -13,36 +16,62 @@
     "declineAll": "Alle ablehnen",
     "saveAndClose": "speichern und schliessen"
   },
+  "SimpleBanner": {
+    "title": "Nutzung von Cookies und andere Technologien.",
+    "text": "<p>Die BImA nutzt auf ihrer Website Cookies und vergleichbare Funktionen zur Verarbeitung von Endgeräteinformationen und personenbezogenen Daten. Die Verarbeitung dient der Einbindung von Inhalten, externen Diensten und Elementen Dritter, der Bereitstellung BImA-eigener Dienste sowie der statistischen Analyse/Messung. Je nach Funktion werden dabei Daten an Dritte weitergegeben innerhalb der EU. Ihre Einwilligung ist stets freiwillig, für die Nutzung unserer Website nicht erforderlich und kann jederzeit über den Link “Cookie-Einstellungen” in der Fußzeile unten abgelehnt oder widerrufen werden.</p>",
+    "links": [
+      {
+        "url": "https://resources.bundesimmobilien.de/bima/de/datenschutz",
+        "title": "Datenschutzerklärung"
+      },
+      {
+        "url": "https://resources.bundesimmobilien.de/bima/de/impressum",
+        "title": "Impressum"
+      }
+    ]
+  },
   "cookieDefinitions": {
     "functional": {
+      "buttons": {
+        "all": {
+          "title": "Alle Cookies"
+        }
+      },
       "title": "Funktionell",
-      "description": "Mit diesen Tags können wir die Nutzung der Website analysieren, um deren Leistung zu messen und zu verbessern.",
+      "description": "Mit dieses Cookies werden Ihnen auf der Webseite zusätzliche Funktionen bereitgestellt.",
       "cookies": {
         "gmap": {
           "title": "Google Maps",
           "description": {
-            "title": "Google Maps",
-            "text": ""
+            "title": "Google",
+            "text": "Dieses Cookie wird vom Google ('google.com') gesetzt."
           }
         },
         "vimeo": {
           "title": "Vimeo Video",
           "description": {
-            "title": "Vimeo Video",
-            "text": ""
+            "title": "Vimeo",
+            "text": "Dieses Cookie wird vom Video-Host-Service 'vimeo.com' gesetzt."
           }
         }
       }
     },
     "essential": {
       "title": "Essentiell",
-      "description": "Diese Tags werden für die Grundfunktionen der Website benötigt.",
+      "description": "Diese Cookies werden für die Grundfunktionen der Website benötigt.",
       "cookies": {
         "authentication": {
           "title": "Authentifizierung",
           "description": {
             "title": "Authentifizierung",
-            "text": ""
+            "text": "In diesem Cookie wird die Information über den aktuell an der Seite angemeldenten Benutzer gespeichert."
+          }
+        },
+        "cookie_consent": {
+          "title": "Cookie-Zustimmung",
+          "description": {
+            "title": "Cookie-Zustimmung",
+            "text": "In diesem Cookie wird Ihre Zustimmung über die Verwendung der Cookies gepeichert."
           }
         }
       }
