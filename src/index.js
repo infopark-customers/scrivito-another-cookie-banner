@@ -1,8 +1,9 @@
-export { default as CookieBanner } from "./Components/CookieBanner";
+import CookieBanner from "./Components/CookieBanner";
+import CookieGatekeeper from "./Components/CookieGatekeeper";
+
 import {
   useCookieConsent,
   CookieConsentProvider,
 } from "./Components/CookieConsentContext";
+export { useCookieConsent, CookieConsentProvider, CookieBanner, CookieGatekeeper };
 
-export { default as CookieGatekeeper } from "./Components/CookieGatekeeper";
-export { useCookieConsent, CookieConsentProvider };

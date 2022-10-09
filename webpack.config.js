@@ -3,6 +3,9 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const SRC_PATH = path.join(__dirname, "src");
 
 module.exports = {
+  optimization: {
+    minimize: false
+  },
   entry: {
     index: "./src/index.js",
   },
@@ -33,11 +36,6 @@ module.exports = {
         ],
       },
       {
-        test: /\.tsx?$/,
-        use: "ts-loader",
-        exclude: /node_modules/,
-      },
-      {
         test: /\.(png|jpg|gif|svg)$/i,
         use: [
           {
@@ -56,20 +54,27 @@ module.exports = {
           "sass-loader",
         ],
       },
-      {
-        test: /\.(eot|ttf|woff|woff2)$/,
-        type: "asset/resource",
-      },
     ],
   },
   resolve: {
-    extensions: [".ts", ".js", ".tsx", ".scss"],
+    extensions: [".js", ".scss"],
   },
   plugins: [
     new MiniCssExtractPlugin({
       filename: "[name].css",
     }),
   ],
+  externals: {
+    "@fortawesome/fontawesome-free": "@fortawesome/fontawesome-free",
+    classnames: "classnames",
+    lodash: "lodash",
+    "lodash-es": "lodash-es",
+    "parse-domain": "parse-domain",
+    react: "react",
+    "react-bootstrap": "react-bootstrap",
+    "react-cookie": "react-cookie",
+    "react-dom": "react-dom"
+  },
   output: {
     filename: "[name].js",
     path: path.resolve(__dirname, "dist"),

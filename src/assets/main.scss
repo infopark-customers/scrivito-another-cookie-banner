@@ -1,6 +1,3 @@
-@import "@fortawesome/fontawesome-free/css/solid.css";
-@import "@fortawesome/fontawesome-free/css/fontawesome.css";
-
 $white: rgb(255, 255, 255);
 $black: rgb(0, 0, 0);
 $white: rgb(255, 255, 255);
@@ -24,7 +21,7 @@ $font-base-size: 16px!important;
   font-size: 16px;
   @import "bootstrap";
   @import "./customization";
-  @import "forms";
+  @import "./forms";
   --bs-border-color: #dee2e6;
 }
 
