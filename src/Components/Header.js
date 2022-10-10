@@ -8,7 +8,7 @@ export default function Header() {
     <Modal.Header closeButton={isExtendedMode()}>
       {logoUrl && 
         <img
-          src={logoUrl}
+          src={logoUrl || defaultLogo}
           alt={I18n.t("BannerHeader.logoAlt", { ns: "cookieBanner" })}
           className="img-fluid"
         />

@@ -36,22 +36,15 @@ module.exports = {
         ],
       },
       {
-        test: /\.(png|jpg|gif|svg)$/i,
-        use: [
-          {
-            loader: "url-loader",
-            options: {
-              limit: 8192,
-            },
-          },
-        ],
+        test: /\.svg$/i,
+        type: "asset/inline",
       },
       {
         test: /\.s?css$/,
         use: [
           { loader: MiniCssExtractPlugin.loader },
-          "css-loader",
-          "sass-loader",
+          { loader: 'css-loader' }, 
+          { loader: 'sass-loader' },
         ],
       },
     ],
@@ -71,7 +64,7 @@ module.exports = {
     "lodash-es": "lodash-es",
     "parse-domain": "parse-domain",
     react: "react",
-    "react-bootstrap": "react-bootstrap",
+    // "react-bootstrap": "react-bootstrap",
     "react-cookie": "react-cookie",
     "react-dom": "react-dom"
   },
@@ -82,6 +75,7 @@ module.exports = {
     libraryTarget: "umd",
     library: "scrivito-another-cookie-banner",
     globalObject: "this",
+    assetModuleFilename: "./[name][ext]"
   },
   mode: "production",
 };

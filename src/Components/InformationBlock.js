@@ -1,4 +1,5 @@
 import * as React from "react";
+import circleInfoSolidIcon from "../assets/circle-info-solid.svg";
 
 function InformationBlock({ children, cookieName, disabled }) {
   const [open, setOpen] = React.useState(false);
@@ -11,7 +12,7 @@ function InformationBlock({ children, cookieName, disabled }) {
         aria-controls={`infoCollapseOne-${cookieName}`}
         onClick={() => setOpen(!open)}
       >
-        <i className="fas fa-info-circle"></i>
+        <img src={circleInfoSolidIcon} class="information-icon" />
       </button>
       <div
         id={`infoCollapseOne-${cookieName}`}
