@@ -1,6 +1,6 @@
 {
   "name": "scrivito-another-cookie-banner",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "",
   "main": "dist/index.js",
   "style": "dist/index.css",
@@ -29,7 +29,6 @@
     "bootstrap": "^5.2.2"
   },
   "peerDependencies": {
-    "@fortawesome/fontawesome-free": "*",
     "classnames": "*",
     "i18next": "*",
     "lodash": "*",
@@ -62,8 +61,10 @@
     "file-loader": "^6.2.0",
     "mini-css-extract-plugin": "^2.6.1",
     "parse-domain": "^7.0.1",
+    "resolve-url-loader": "^5.0.0",
     "sass": "^1.55.0",
     "sass-loader": "^13.1.0",
+    "svg-url-loader": "^8.0.0",
     "url-loader": "^4.1.1",
     "webpack-cli": "^4.10.0"
   }

@@ -85,10 +85,9 @@
               top: 0.52rem;
             }
             input:checked + .slider:after {
-              content: "\f00c";
-              font-family: "Font Awesome 5 Free";
-              font-size: 13px;
-              font-weight: 900;
+              // content: "\f00c";
+              content: url(check-solid.svg);
+              // background-image: url("./check-solid.svg");
               left: 7px;
               right: auto;
             }
