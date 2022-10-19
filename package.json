@@ -1,6 +1,6 @@
 {
   "name": "scrivito-another-cookie-banner",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "",
   "main": "dist/index.js",
   "style": "dist/index.css",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/antonmezin/scrivito-cookier-banner.git"
+    "url": "git@github.com:infopark-customers/scrivito-another-cookie-banner.git"
   },
   "keywords": [
     "cookie",
@@ -21,10 +21,6 @@
   ],
   "author": " <Anton Mezin> (anton.mezin@justrelate.com)",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/antonmezin/scrivito-cookier-banner/issues"
-  },
-  "homepage": "https://github.com/antonmezin/scrivito-cookier-banner#readme",
   "dependencies": {
     "bootstrap": "^5.2.2"
   },
