@@ -1,3 +1,5 @@
+## 1.0.9
+- [new] move to private git repo 
 ## 1.0.8
 - [new] no dependency from font awesome
 - use svg images for icons
