@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useCookies } from "react-cookie";
-import domainName from "../utils/domainName";
+import domainName, {subdomain} from "../utils/domainName";
 import defaultConfig from "../config/cookieConfiguration.json";
 import I18n from "../config/i18n";
 
@@ -54,10 +54,13 @@ export function CookieConsentProvider({
       setBannerVisibility(false);
       return;
     }
-    if (!cookies[COOKIE_NAME]) {
+    const currentSubdomain = subdomain(window.location.hostname);
+    const subdomainIsExcluded =
+      cConfig.excludedSubdomains.indexOf(currentSubdomain) !== -1;
+    if (!subdomainIsExcluded && !cookies[COOKIE_NAME]) {
       setBannerVisibility(true);
     }
-  }, [cookies, COOKIE_NAME, inEditorMode]);
+  }, [cookies, COOKIE_NAME, inEditorMode, cConfig.excludedSubdomains]);
 
   const editableCookies = cConfig.blocks.flatMap((item) =>
     item.editable ? item.cookies : []
