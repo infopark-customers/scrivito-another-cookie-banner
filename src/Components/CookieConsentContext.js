@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useCookies } from "react-cookie";
-import domainName, {subdomain} from "../utils/domainName";
+import domainName, { subdomain } from "../utils/domainName";
 import defaultConfig from "../config/cookieConfiguration.json";
 import I18n from "../config/i18n";
 
