@@ -1,3 +1,5 @@
+## 1.0.11
+- [new] add excluded domains
 ## 1.0.9
 - [new] move to private git repo 
 ## 1.0.8

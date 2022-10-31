@@ -10,6 +10,7 @@ Example:
 ```
 {
   "name": "_bima_cookie_consent",
+  "excludedSubdomains": ["resources"],
   "technicalNames": {
     "gmap": [],
     "authentication": ["_doorkeeper_session", "rack.session"],
