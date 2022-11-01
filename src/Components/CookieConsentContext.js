@@ -1,5 +1,4 @@
 import * as React from "react";
-import * as Scrivito from "scrivito";
 import { useCookies } from "react-cookie";
 import domainName from "../utils/domainName";
 import defaultConfig from "../config/cookieConfiguration.json";
