@@ -10,7 +10,6 @@ Example:
 ```
 {
   "name": "_bima_cookie_consent",
-  "excludedSubdomains": ["resources"],
   "technicalNames": {
     "gmap": [],
     "authentication": ["_doorkeeper_session", "rack.session"],
@@ -62,6 +61,9 @@ const cookieBannerTranslations = {de: cookieBannerTranslationsDe};
     language="de"
     translations={cookieBannerTranslations}
     inEditorMode={Scrivito.isEditorLoggedIn()}
+    isExcludedPage={
+      Scrivito.currentPage().get("hideCookieBanner") || false
+    }
     logoUrl={logoUrl}
   >
   ....
