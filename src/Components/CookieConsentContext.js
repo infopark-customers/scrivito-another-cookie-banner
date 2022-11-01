@@ -13,6 +13,7 @@ export function CookieConsentProvider({
   language,
   translations,
   inEditorMode,
+  isExcludedPage,
 }) {
   const cConfig = cookieConfig || defaultConfig;
   const COOKIE_NAME = cConfig.name || defaultConfig.name;
@@ -22,7 +23,6 @@ export function CookieConsentProvider({
   const SIMPLE_MODE = "simple";
 
   const [cookies, setCookie] = useCookies([COOKIE_NAME]);
-  const [pageIsExcluded, setPageIsExcluded] = React.useState(false);
   if (language && I18n.resolvedLanguage !== language) {
     I18n.language = language;
   }
@@ -55,14 +55,14 @@ export function CookieConsentProvider({
       setBannerVisibility(false);
       return;
     }
-    if (pageIsExcluded) {
+    if (isExcludedPage) {
       setBannerVisibility(false);
       return;
     }
     if (!cookies[COOKIE_NAME]) {
       setBannerVisibility(true);
     }
-  }, [cookies, COOKIE_NAME, inEditorMode, pageIsExcluded]);
+  }, [cookies, COOKIE_NAME, inEditorMode, isExcludedPage]);
 
   const editableCookies = cConfig.blocks.flatMap((item) =>
     item.editable ? item.cookies : []
