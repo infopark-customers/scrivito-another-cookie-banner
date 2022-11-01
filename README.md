@@ -61,6 +61,9 @@ const cookieBannerTranslations = {de: cookieBannerTranslationsDe};
     language="de"
     translations={cookieBannerTranslations}
     inEditorMode={Scrivito.isEditorLoggedIn()}
+    isExcludedPage={
+      Scrivito.currentPage().get("hideCookieBanner") || false
+    }
     logoUrl={logoUrl}
   >
   ....
