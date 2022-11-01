@@ -1,6 +1,7 @@
 import * as React from "react";
+import * as Scrivito from "scrivito";
 import { useCookies } from "react-cookie";
-import domainName, { subdomain } from "../utils/domainName";
+import domainName from "../utils/domainName";
 import defaultConfig from "../config/cookieConfiguration.json";
 import I18n from "../config/i18n";
 
@@ -22,6 +23,7 @@ export function CookieConsentProvider({
   const SIMPLE_MODE = "simple";
 
   const [cookies, setCookie] = useCookies([COOKIE_NAME]);
+  const [pageIsExcluded, setPageIsExcluded] = React.useState(false);
   if (language && I18n.resolvedLanguage !== language) {
     I18n.language = language;
   }
@@ -54,13 +56,14 @@ export function CookieConsentProvider({
       setBannerVisibility(false);
       return;
     }
-    const currentSubdomain = subdomain(window.location.hostname);
-    const subdomainIsExcluded =
-      cConfig.excludedSubdomains.indexOf(currentSubdomain) !== -1;
-    if (!subdomainIsExcluded && !cookies[COOKIE_NAME]) {
+    if (pageIsExcluded) {
+      setBannerVisibility(false);
+      return;
+    }
+    if (!cookies[COOKIE_NAME]) {
       setBannerVisibility(true);
     }
-  }, [cookies, COOKIE_NAME, inEditorMode, cConfig.excludedSubdomains]);
+  }, [cookies, COOKIE_NAME, inEditorMode, pageIsExcluded]);
 
   const editableCookies = cConfig.blocks.flatMap((item) =>
     item.editable ? item.cookies : []
@@ -137,6 +140,7 @@ export function CookieConsentProvider({
         isExtendedMode: () => bannerMode === EXTENDED_MODE,
         isCookieTypeAccepted: (typeName) => isCookieTypeAccepted(typeName),
         cookieKeysForName: (cookieName) => cookieKeysForName(cookieName),
+        setPageIsExcluded: (value) => setPageIsExcluded(value),
         switchCookiesOfType: (typeName, shouldAccept) =>
           setCookieDecision(
             cookieTypeNames(typeName),
