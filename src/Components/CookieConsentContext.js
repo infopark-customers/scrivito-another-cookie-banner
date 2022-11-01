@@ -13,7 +13,7 @@ export function CookieConsentProvider({
   language,
   translations,
   inEditorMode,
-  isExcludedPage,
+  isExcludedPage = false,
 }) {
   const cConfig = cookieConfig || defaultConfig;
   const COOKIE_NAME = cConfig.name || defaultConfig.name;
@@ -139,7 +139,6 @@ export function CookieConsentProvider({
         isExtendedMode: () => bannerMode === EXTENDED_MODE,
         isCookieTypeAccepted: (typeName) => isCookieTypeAccepted(typeName),
         cookieKeysForName: (cookieName) => cookieKeysForName(cookieName),
-        setPageIsExcluded: (value) => setPageIsExcluded(value),
         switchCookiesOfType: (typeName, shouldAccept) =>
           setCookieDecision(
             cookieTypeNames(typeName),
