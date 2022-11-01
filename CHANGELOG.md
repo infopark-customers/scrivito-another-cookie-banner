@@ -1,3 +1,6 @@
+## 1.1.0
+- [new] add additional parameter to define page as excluded
+- [fix] remove excluded domains
 ## 1.0.11
 - [new] add excluded domains
 ## 1.0.9
