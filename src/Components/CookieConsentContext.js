@@ -102,7 +102,8 @@ export function CookieConsentProvider({
     setBannerMode(bannerMode === EXTENDED_MODE ? SIMPLE_MODE : EXTENDED_MODE);
   };
 
-  const isCookieConsentEmpty = () => Object.keys(cookieConsentChoice).length === 0;
+  const isCookieConsentEmpty = () =>
+    Object.keys(cookieConsentChoice).length === 0;
 
   const saveAndClose = () => {
     if (isCookieConsentEmpty()) {

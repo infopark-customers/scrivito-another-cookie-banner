@@ -12,7 +12,11 @@ function InformationBlock({ children, cookieName, disabled }) {
         aria-controls={`infoCollapseOne-${cookieName}`}
         onClick={() => setOpen(!open)}
       >
-        <img src={circleInfoSolidIcon} class="information-icon" />
+        <img
+          src={circleInfoSolidIcon}
+          className="information-icon"
+          alt="information icon"
+        />
       </button>
       <div
         id={`infoCollapseOne-${cookieName}`}
