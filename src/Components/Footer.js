@@ -4,7 +4,7 @@ import { useCookieConsent } from "./CookieConsentContext";
 
 export default function Footer() {
   const {
-    setBannerVisibility,
+    saveAndClose,
     acceptAll,
     declineAll,
     switchBannerMode,
@@ -16,7 +16,7 @@ export default function Footer() {
       <Modal.Footer>
         <Button
           variant="primary"
-          onClick={() => setBannerVisibility(false)}
+          onClick={() => saveAndClose()}
           className="btn-cta"
         >
           {I18n.t("buttons.saveAndClose", { ns: "cookieBanner" })}

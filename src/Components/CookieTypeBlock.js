@@ -5,7 +5,6 @@ import SingleCookieBlock from "./SingleCookieBlock";
 import { useCookieConsent } from "./CookieConsentContext";
 
 function CookieTypeBlock({ cookieDescription, eventKey }) {
-  console.log("---->", cookieDescription, eventKey);
   const { switchCookiesOfType, isCookieTypeAccepted, I18n } =
     useCookieConsent();
   const { name: typeName, cookies, editable } = cookieDescription;

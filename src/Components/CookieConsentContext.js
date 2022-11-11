@@ -13,7 +13,6 @@ export function CookieConsentProvider({
   language,
   translations,
   inEditorMode,
-  isExcludedPage = false,
 }) {
   const cConfig = cookieConfig || defaultConfig;
   const COOKIE_NAME = cConfig.name || defaultConfig.name;
@@ -55,14 +54,10 @@ export function CookieConsentProvider({
       setBannerVisibility(false);
       return;
     }
-    if (isExcludedPage) {
-      setBannerVisibility(false);
-      return;
-    }
     if (!cookies[COOKIE_NAME]) {
       setBannerVisibility(true);
     }
-  }, [cookies, COOKIE_NAME, inEditorMode, isExcludedPage]);
+  }, [cookies, COOKIE_NAME, inEditorMode]);
 
   const editableCookies = cConfig.blocks.flatMap((item) =>
     item.editable ? item.cookies : []
@@ -107,6 +102,15 @@ export function CookieConsentProvider({
     setBannerMode(bannerMode === EXTENDED_MODE ? SIMPLE_MODE : EXTENDED_MODE);
   };
 
+  const isCookieConsentEmpty = () => Object.keys(cookieConsentChoice).length === 0;
+
+  const saveAndClose = () => {
+    if (isCookieConsentEmpty()) {
+      setDecisionForAllCookies(DECLINED);
+    }
+    setBannerVisibility(false);
+  };
+
   const isCookieTypeAccepted = (typeName) => {
     const accepted = cookieTypeNames(typeName).find(
       (name) => cookieConsentChoice[name]?.decision === ACCEPTED
@@ -139,6 +143,7 @@ export function CookieConsentProvider({
         isExtendedMode: () => bannerMode === EXTENDED_MODE,
         isCookieTypeAccepted: (typeName) => isCookieTypeAccepted(typeName),
         cookieKeysForName: (cookieName) => cookieKeysForName(cookieName),
+        saveAndClose: () => saveAndClose(),
         switchCookiesOfType: (typeName, shouldAccept) =>
           setCookieDecision(
             cookieTypeNames(typeName),
