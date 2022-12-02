@@ -6,8 +6,20 @@ import Body from "./Body";
 import Footer from "./Footer";
 import "../assets/main.scss";
 
-export default function CookieBanner() {
-  const { bannerVisibility, switchBannerMode } = useCookieConsent();
+export default function CookieBanner({ hideOnLoad }) {
+  const {
+    bannerVisibility,
+    switchBannerMode,
+    setBannerVisibility,
+    cookieExists,
+  } = useCookieConsent();
+
+  React.useEffect(() => {
+    if (!cookieExists() && !hideOnLoad) {
+      setBannerVisibility(true);
+    }
+  }, []);
+
   return (
     <Modal
       backdrop="static"

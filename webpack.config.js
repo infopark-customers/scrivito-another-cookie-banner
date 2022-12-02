@@ -64,9 +64,8 @@ module.exports = {
     "lodash-es": "lodash-es",
     "parse-domain": "parse-domain",
     react: "react",
-    // "react-bootstrap": "react-bootstrap",
-    "react-cookie": "react-cookie",
-    "react-dom": "react-dom"
+    "js-cookie": "js-cookie",
+    "react-dom": "react-dom",
   },
   output: {
     filename: "[name].js",
@@ -75,7 +74,7 @@ module.exports = {
     libraryTarget: "umd",
     library: "scrivito-another-cookie-banner",
     globalObject: "this",
-    assetModuleFilename: "./[name][ext]"
+    assetModuleFilename: "./[name][ext]",
   },
   mode: "production",
 };
