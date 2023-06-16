@@ -18,6 +18,8 @@ export default function CookieBanner() {
       show={bannerVisibility}
       onHide={() => switchBannerMode()}
       scrollable
+      aria-label="cookie-banner"
+      keyboard={false}
     >
       <Header />
       <Body />
