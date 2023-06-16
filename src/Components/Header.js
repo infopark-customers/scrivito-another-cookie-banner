@@ -3,9 +3,9 @@ import { Modal } from "react-bootstrap";
 import { useCookieConsent } from "./CookieConsentContext";
 
 export default function Header() {
-  const { isExtendedMode, logoUrl, I18n } = useCookieConsent();
+  const { logoUrl, I18n } = useCookieConsent();
   return (
-    <Modal.Header closeButton={isExtendedMode()}>
+    <Modal.Header>
       {logoUrl && 
         <img
           src={logoUrl || defaultLogo}
