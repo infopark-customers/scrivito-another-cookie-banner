@@ -9,6 +9,7 @@
  */
 export const onKeyAccess = (keyEvent, func) => {
   if (keyEvent.key === "Enter" || keyEvent.key === " ") {
+    console.log("onKeyAccess:", func, keyEvent.key);
     func();
   }
 };

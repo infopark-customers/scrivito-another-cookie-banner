@@ -3,28 +3,45 @@ import Accordion from "react-bootstrap/Accordion";
 import className from "classnames";
 import SingleCookieBlock from "./SingleCookieBlock";
 import { useCookieConsent } from "./CookieConsentContext";
+import { onKeyAccess } from "../utils/accessibilityHelper";
 
 function CookieTypeBlock({ cookieDescription, eventKey }) {
   const { switchCookiesOfType, isCookieTypeAccepted, I18n } =
     useCookieConsent();
   const { name: typeName, cookies, editable } = cookieDescription;
 
+  const handleKeyDown = (keyEvent) => {
+    if (keyEvent.key === " ") {
+      keyEvent.preventDefault();
+      keyEvent.stopPropagation();
+    }
+
+    const toggledCookieAcceptence = !isCookieTypeAccepted(typeName);
+
+    onKeyAccess(keyEvent, () =>
+      switchCookiesOfType(typeName, toggledCookieAcceptence)
+    );
+  };
+
   return (
     <Accordion.Item eventKey={eventKey}>
       <Accordion.Header as="div">
+        {/* TODO: all must be treated as nested  in Button element */}
         <span className="header-text-wrapper">
-          <h6>
+          <span>
+            {/* TODO: <span> pretending to be <h6>  */}
             {I18n.t(`cookieDefinitions.${typeName}.title`, {
               ns: "cookieBanner",
             })}
-          </h6>
-          <p>
+          </span>
+          <span>
+            {/* TODO: span pretendig to be <p> */}
             {I18n.t(`cookieDefinitions.${typeName}.description`, {
               ns: "cookieBanner",
             })}
-          </p>
+          </span>
         </span>
-        <div className="toggle-btn-wrapper">
+        <span className="toggle-btn-wrapper">
           <label
             className={className("toggle-btn", { "is-disabled": !editable })}
           >
@@ -43,13 +60,14 @@ function CookieTypeBlock({ cookieDescription, eventKey }) {
               onChange={(event) =>
                 switchCookiesOfType(typeName, event.target.checked)
               }
-              checked={!editable || isCookieTypeAccepted(typeName)}
+              checked={isCookieTypeAccepted(typeName)}
               disabled={!editable}
               value="accepted"
+              onKeyDown={handleKeyDown}
             />
             <span className="slider"></span>
           </label>
-        </div>
+        </span>
       </Accordion.Header>
       <Accordion.Body>
         <form className="accordion accordion-info">
