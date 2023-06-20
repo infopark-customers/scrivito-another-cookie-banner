@@ -6,13 +6,13 @@ export default function Header() {
   const { logoUrl, I18n } = useCookieConsent();
   return (
     <Modal.Header>
-      {logoUrl && 
+      {logoUrl && (
         <img
           src={logoUrl || defaultLogo}
           alt={I18n.t("BannerHeader.logoAlt", { ns: "cookieBanner" })}
           className="img-fluid"
         />
-      }
+      )}
     </Modal.Header>
   );
 }
