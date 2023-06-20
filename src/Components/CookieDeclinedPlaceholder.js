@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Button } from "react-bootstrap";
 import { useCookieConsent } from "./CookieConsentContext";
+import { onKeyAccess } from "../utils/accessibilityHelper";
 
 function CookieDeclinedPlaceholder({
   name,
@@ -20,6 +21,9 @@ function CookieDeclinedPlaceholder({
           variant="primary"
           className="btn-cta"
           onClick={() => switchDecision(name)}
+          onKeyDown={(keyEvent) =>
+            onKeyAccess(keyEvent, () => switchDecision(name))
+          }
         >
           {buttonText}
         </Button>
