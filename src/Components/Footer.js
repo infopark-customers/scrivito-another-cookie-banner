@@ -36,18 +36,15 @@ export default function Footer() {
   }
   return (
     <Modal.Footer>
-      <a // TODO: can we make it Button? with this <a> element styles? or <div?
-        // Broken same-page link
-        // A link to another location within the page is present but does not have a corresponding target.
-        role="button"
+      <button
         onClick={switchBannerMode}
         onKeyDown={(keyEvent) =>
           onKeyAccess(keyEvent, () => switchBannerMode())
         }
-        href="#bottom"
+        className="btn-cta btn-quiet"
       >
         {I18n.t("buttons.settings", { ns: "cookieBanner" })}
-      </a>
+      </button>
       <Button
         variant="primary"
         onClick={acceptAll}
