@@ -4,6 +4,7 @@ import CookieDeclinedPlaceholder from "./CookieDeclinedPlaceholder";
 
 function CookieGatekeeper({ children, cookieName }) {
   const { isAccepted, I18n } = useCookieConsent();
+
   if (!isAccepted(cookieName)) {
     return (
       <CookieDeclinedPlaceholder
@@ -23,7 +24,8 @@ function CookieGatekeeper({ children, cookieName }) {
       />
     );
   }
-  return children;
+
+  return  <>{children}</>;
 }
 
 export default CookieGatekeeper;
