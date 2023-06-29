@@ -30,68 +30,33 @@ function CookieTypeBlock({ cookieDescription, eventKey }) {
           <form>
             <div className="form-check">
               <input
+                id={typeName}
                 className="form-check-input"
                 type="checkbox"
-                value=""
-                id="webanalysis-cookies"
+                value="accepted"
+                onChange={(event) =>
+                  switchCookiesOfType(typeName, event.target.checked)
+                }
+                onKeyDown={handleKeyDown}
+                checked={!editable || isCookieTypeAccepted(typeName)}
+                disabled={!editable}
               />
-              <label className="form-check-label" htmlFor="webanalysis-cookies">
-                <span className="d-block bold">{I18n.t(`cookieDefinitions.${typeName}.title`, {
-                ns: "cookieBanner",
-              })}</span>
+              <label className="form-check-label" htmlFor={typeName}>
+                <span className="d-block bold">
+                  {I18n.t(`cookieDefinitions.${typeName}.title`, {
+                    ns: "cookieBanner",
+                  })}
+                </span>
                 {I18n.t(`cookieDefinitions.${typeName}.description`, {
-                ns: "cookieBanner",
-              })}
+                  ns: "cookieBanner",
+                })}
               </label>
             </div>
           </form>
         </div>
-        <Accordion.Header>
-          {/* HELLO */}
-          {/* TODO: all must be treated as nested  in Button element */}
-          {/* <span className="header-text-wrapper">
-            <span>
-              
-              {I18n.t(`cookieDefinitions.${typeName}.title`, {
-                ns: "cookieBanner",
-              })}
-            </span>
-            <span>
-              {I18n.t(`cookieDefinitions.${typeName}.description`, {
-                ns: "cookieBanner",
-              })}
-            </span>
-          </span> */}
-          {/* <span className="toggle-btn-wrapper">
-            <label
-              className={className("toggle-btn", { "is-disabled": !editable })}
-            >
-              <span
-                className="d-none"
-                title={I18n.t(`cookieDefinitions.${typeName}.buttons.all.title`, {
-                  ns: "cookieBanner",
-                })}
-              >
-                {I18n.t(`cookieDefinitions.${typeName}.buttons.all.title`, {
-                  ns: "cookieBanner",
-                })}
-              </span>
-              <input
-                type="checkbox"
-                onChange={(event) =>
-                  switchCookiesOfType(typeName, event.target.checked)
-                }
-                checked={isCookieTypeAccepted(typeName)}
-                disabled={!editable}
-                value="accepted"
-                onKeyDown={handleKeyDown}
-              />
-              <span className="slider"></span>
-            </label>
-          </span> */}
-        </Accordion.Header>
+        <Accordion.Header>{/* display arrow block */}</Accordion.Header>
       </div>
-      <Accordion.Body>
+      <Accordion.Body className={className("", { disabled: !editable })}>
         <form className="accordion accordion-info">
           {cookies.map((cookie, indx) => (
             <SingleCookieBlock

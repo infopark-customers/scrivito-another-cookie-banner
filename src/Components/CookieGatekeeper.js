@@ -25,7 +25,7 @@ function CookieGatekeeper({ children, cookieName }) {
     );
   }
 
-  return  <>{children}</>;
+  return <>{children}</>;
 }
 
 export default CookieGatekeeper;

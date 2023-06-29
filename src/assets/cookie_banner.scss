@@ -22,48 +22,204 @@
   .accordion {
     .accordion-item {
       border-radius: 0;
+      border: 1px solid rgb(204, 204, 204);
+      margin-bottom: 1rem;
+
       .header-text-wrapper {
         display: inline-flex;
         padding: 16px 20px;
-        .form-check,
-        .form-check * {
-          cursor: pointer;
-        }
+        flex-grow: 1;
+        margin-right: 1rem;
       }
+
       .border-bottom {
         border-bottom: 1px solid #ccc;
       }
+
       .toggle-btn > input {
         height: 100%;
         opacity: 1;
         width: 100%;
       }
+
       .toggle-btn > input:focus,
       .toggle-btn > input:focus-visible {
         border: 2px solid rgb(0, 82, 126);
-        box-shadow: 0px 0px 0px 0.25rem rgba(0, 82, 126, 0.5);
+        // box-shadow: 0px 0px 0px 0.25rem rgba(0, 82, 126, 0.5);
       }
+
       .accordion-header {
         border-bottom: 0;
         display: inline-flex;
         padding: 0;
-        button {
-          border: 2PX solid transparent;
+
+        .accordion-button {
+          background-color: transparent;
+          border: 2px solid transparent;
+          border-radius: 0;
           box-shadow: none;
-          display: inline-flex;
-          width: auto;
-          &:focus,
-          &:focus-visible {
+          color: rgb(0, 0, 0);
+
+          p:last-child {
+            margin-bottom: 0;
+          }
+
+          &:focus {
             border: 2px solid rgb(0, 82, 126);
-            border-radius: 0;
             box-shadow: 0px 0px 0px 0.25rem rgba(0, 82, 126, 0.5);
+          }
+
+          @media only screen and (max-width: 600px) {
+            padding-top: 3rem;
+          }
+        }
+
+        .toggle-btn-wrapper {
+          @media only screen and (max-width: 600px) {
+            position: absolute;
+            top: 1rem;
+          }
+
+          .toggle-btn.is-disabled {
+            .slider {
+              cursor: not-allowed;
+              opacity: .4;
+            }
+          }
+
+          .toggle-btn {
+            min-height: 22px;
+            max-height: 22px;
+            margin-right: 1rem;
+            min-width: 42px;
+            width: 42px;
+
+            .slider:before,
+            .slider:after {
+              -webkit-transform: translateY(-50%);
+              -ms-transform: translateY(-50%);
+              height: 0.9rem;
+              width: 0.9rem;
+              top: 50%;
+              transform: translateY(-50%);
+            }
+
+            .slider:before {
+              left: .2rem;
+            }
+
+            input:disabled {
+              cursor: not-allowed;
+              opacity: .6;
+            }
+
+            input:checked + .slider:before {
+              -webkit-transform: translate(20px, -50%);
+              -ms-transform: translate(20px, -50%);
+              transform: translate(20px, -50%);
+            }
+
+            .slider:after {
+              font-size: 14px;
+              right: .2rem;
+              top: 0.52rem;
+            }
+
+            input:checked + .slider:after {
+              content: "\f00c";
+              font-family: "Font Awesome 5 Free";
+              font-size: 13px;
+              font-weight: 900;
+              left: 7px;
+              right: auto;
+            }
           }
         }
       }
+
       .accordion-body {
         padding-left: 2.5em;
+
         p.bold {
           margin-bottom: 0;
+        }
+
+        .form-check {
+          cursor: pointer;
+          margin-bottom: 1rem;
+          padding-left: 0;
+          position: relative;
+
+          @media only screen and (min-width: 992px) {
+            margin-bottom: .5rem;
+          }
+
+          .form-check-input {
+            border: 1px solid rgb(0, 0, 0);
+            cursor: pointer;
+            float: right;
+            height: 1.4rem;
+            margin-top: 0;
+            width: 1.4rem;
+
+            @media only screen and (min-width: 992px) {
+              height: 1.1rem;
+              margin-top: .2em;
+              width: 1.1rem;
+            }
+          }
+
+          .form-check-label {
+            margin-right: 4.5rem;
+          }
+        }
+
+        .accordion.accordion-info {
+          .accordion-item {
+            border: 0;
+
+            .accordion-button {
+              right: 2rem;
+              top: -0.55rem;
+              background: transparent;
+              padding: 0.5rem;
+              position: absolute;
+              width: auto;
+
+              &:after {
+                display: none;
+              }
+
+              i {
+                font-size: 25px;
+              }
+
+              @media only screen and (min-width: 992px) {
+                right: 1.5rem;
+                top: -0.36rem;
+
+                i {
+                  font-size: 20px;
+                }
+              }
+            }
+
+            .accordion-button:not(.collapsed) {
+              box-shadow: none;
+            }
+
+            .accordion-body {
+              padding: 1rem 0;
+
+              small {
+                font-family: $font-family-sans-bold;
+              }
+
+              p:last-child {
+                margin-bottom: 0;
+              }
+            }
+          }
         }
       }
     }
@@ -83,21 +239,5 @@
       text-align: left;
       width: auto;
     }
-  }
-}
-
-.btn.btn-no-border {
-  background-color: transparent;
-  border: 2px solid transparent;
-  color:  rgb(0, 82, 126);
-  &:focus,
-  &:focus-visible,
-  &:hover {
-      color:  rgb(0, 82, 126);
-  }
-  &:focus,
-  &:focus-visible {
-    border: 2px solid rgb(0, 82, 126);
-    box-shadow: 0px 0px 0px 0.25rem rgba(0, 82, 126, 0.5);
   }
 }
