@@ -41,7 +41,7 @@ export default function Footer() {
         onKeyDown={(keyEvent) =>
           onKeyAccess(keyEvent, () => switchBannerMode())
         }
-        className="btn-cta btn-quiet"
+        className="btn-cta btn btn-no-border"
       >
         {I18n.t("buttons.settings", { ns: "cookieBanner" })}
       </button>
