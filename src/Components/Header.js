@@ -8,7 +8,7 @@ export default function Header() {
     <Modal.Header>
       {logoUrl && (
         <img
-          src={logoUrl || defaultLogo}
+          src={logoUrl}
           alt={I18n.t("BannerHeader.logoAlt", { ns: "cookieBanner" })}
           className="img-fluid"
         />
