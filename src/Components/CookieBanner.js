@@ -7,7 +7,7 @@ import Footer from "./Footer";
 import "../assets/main.scss";
 
 export default function CookieBanner() {
-  const { bannerVisibility, switchBannerMode } = useCookieConsent();
+  const { bannerVisibility, switchBannerMode, I18n } = useCookieConsent();
   return (
     <Modal
       backdrop="static"
@@ -18,7 +18,7 @@ export default function CookieBanner() {
       show={bannerVisibility}
       onHide={() => switchBannerMode()}
       scrollable
-      aria-label="cookie-banner"
+      aria-label={I18n.t(`CookieBanner.label`, { ns: "cookieBanner" })}
       keyboard={false}
     >
       <Header />
