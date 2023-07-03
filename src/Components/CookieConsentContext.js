@@ -1,8 +1,9 @@
 import * as React from "react";
-import { useCookies } from "react-cookie";
+import Cookies from "js-cookie";
 import domainName from "../utils/domainName";
 import defaultConfig from "../config/cookieConfiguration.json";
 import I18n from "../config/i18n";
+
 
 const CookieConsentContext = React.createContext({});
 
@@ -12,7 +13,6 @@ export function CookieConsentProvider({
   children,
   language,
   translations,
-  inEditorMode,
 }) {
   const cConfig = cookieConfig || defaultConfig;
   const COOKIE_NAME = cConfig.name || defaultConfig.name;
@@ -21,7 +21,6 @@ export function CookieConsentProvider({
   const EXTENDED_MODE = "expanded";
   const SIMPLE_MODE = "simple";
 
-  const [cookies, setCookie] = useCookies([COOKIE_NAME]);
   if (language && I18n.resolvedLanguage !== language) {
     I18n.language = language;
   }
@@ -36,12 +35,18 @@ export function CookieConsentProvider({
       );
     });
   }
+  const readCookieStore = () => {
+    const cookieValue = Cookies.get(COOKIE_NAME);
+    try {
+      return JSON.parse(cookieValue)
+    } catch (e) {
+      return {};
+    }
+  }
 
   const [bannerVisibility, setBannerVisibility] = React.useState(false);
+  const [cookieConsentChoice, setCookieConsentChoice] = React.useState(readCookieStore())
 
-  const [cookieConsentChoice, setCookieConsentChoice] = React.useState(
-    cookies[COOKIE_NAME] || {}
-  );
   const [bannerMode, setBannerMode] = React.useState(SIMPLE_MODE);
 
   const setDecisionForAllCookies = (decision) => {
@@ -49,22 +54,11 @@ export function CookieConsentProvider({
     setBannerVisibility(false);
   };
 
-  React.useEffect(() => {
-    if (inEditorMode) {
-      setBannerVisibility(false);
-      return;
-    }
-    if (!cookies[COOKIE_NAME]) {
-      setBannerVisibility(true);
-    }
-  }, [cookies, COOKIE_NAME, inEditorMode]);
-
   const editableCookies = cConfig.blocks.flatMap((item) =>
     item.editable ? item.cookies : []
   );
 
   const saveDecision = (value) => {
-    setCookieConsentChoice(value);
     const options = {
       path: "/",
       expires: new Date(new Date().setFullYear(new Date().getFullYear() + 1)),
@@ -73,7 +67,8 @@ export function CookieConsentProvider({
     if (dName) {
       options.domain = dName;
     }
-    setCookie(COOKIE_NAME, value, options);
+    setCookieConsentChoice(value);
+    Cookies.set(COOKIE_NAME, JSON.stringify(value), options);
   };
 
   const calculateCookieDecision = (name, decision) => ({
@@ -132,9 +127,9 @@ export function CookieConsentProvider({
       value={{
         I18n,
         logoUrl,
-        cookieBlocks: () => cConfig.blocks,
-        cookieConsentChoice,
         bannerVisibility,
+        cookieConsentChoice,
+        cookieBlocks: () => cConfig.blocks,
         acceptAll: () => setDecisionForAllCookies(ACCEPTED),
         declineAll: () => setDecisionForAllCookies(DECLINED),
         isAccepted: (cookieName) => isAccepted(cookieName),
@@ -145,6 +140,7 @@ export function CookieConsentProvider({
         isCookieTypeAccepted: (typeName) => isCookieTypeAccepted(typeName),
         cookieKeysForName: (cookieName) => cookieKeysForName(cookieName),
         saveAndClose: () => saveAndClose(),
+        cookieExists: () => !!Cookies.get(COOKIE_NAME),
         switchCookiesOfType: (typeName, shouldAccept) =>
           setCookieDecision(
             cookieTypeNames(typeName),

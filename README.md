@@ -39,6 +39,71 @@ Example:
 ## Translations
 I18next is used for localization. There are some standard localization which can be overritten by configuration.
 
+Some blocks in translation files depends on cookies configurations. 
+
+`CookieDeclinedPlaceholder`: contains translations for Gatekeeper-Component. 
+To define diffrent localization for different cookies you have to define new block under `CookieDeclinedPlaceholder` which have same name like your cookie. e.g for cookie named `gmap` you should create block:
+```
+  "gmap": {
+    "iconClass": "fas fa-map-marked-alt",
+    "title": "Cookies abgelehnt",
+    "text": "Sie haben der Verwendung von Cookies nicht zugestimmt. Solange Sie die Zustimmung nicht gegeben haben, wird dieses Element nicht dargestellt."
+  }
+```
+
+Next dynamic blocks are trasnslations for expanded banner view. 
+Under the key  `cookieDefinitions` you have to define blocks for each cookie-group. 
+Inside of such groups you alse have to define descriptions for every cookie.
+``` 
+  "cookieDefinitions": {
+    "functional": {
+      "buttons": {
+        "all": {
+          "title": "Alle Cookies"
+        }
+      },
+      "title": "Funktionell",
+      "description": "Mit dieses Cookies werden Ihnen auf der Webseite zusätzliche Funktionen bereitgestellt.",
+      "cookies": {
+        "gmap": {
+          "title": "Google Maps",
+          "description": {
+            "title": "Google",
+            "text": "Dieses Cookie wird vom Google ('google.com') gesetzt."
+          }
+        },
+        "vimeo": {
+          "title": "Vimeo Video",
+          "description": {
+            "title": "Vimeo",
+            "text": "Dieses Cookie wird vom Video-Host-Service 'vimeo.com' gesetzt."
+          }
+        }
+      }
+    },
+    "essential": {
+      "title": "Essentiell",
+      "description": "Diese Cookies werden für die Grundfunktionen der Website benötigt.",
+      "cookies": {
+        "authentication": {
+          "title": "Authentifizierung",
+          "description": {
+            "title": "Authentifizierung",
+            "text": "In diesem Cookie wird die Information über den aktuell an der Seite angemeldenten Benutzer gespeichert."
+          }
+        },
+        "cookie_consent": {
+          "title": "Cookie-Zustimmung",
+          "description": {
+            "title": "Cookie-Zustimmung",
+            "text": "In diesem Cookie wird Ihre Zustimmung über die Verwendung der Cookies gepeichert."
+          }
+        }
+      }
+    }
+  },
+```
+
 ## Usage in React.js
 
 ### Context Provider
@@ -46,7 +111,6 @@ I18next is used for localization. There are some standard localization which can
 ####Initialize Context provider
 
 ```
-import { CookiesProvider } from "react-cookie";
 import { CookieConsentProvider, CookieBanner } from "scrivito-cookie-banner";
 import cookieConfig from "./config/cookieBannerConfig.json";
 import cookieBannerTranslationsDe from "./config/locales/cookieBanner/de.json";
@@ -54,20 +118,14 @@ import logoUrl "./assets/logoUrl.json
 ....
 const cookieBannerTranslations = {de: cookieBannerTranslationsDe};
 ...
-<CookiesProvider>
-...
   <CookieConsentProvider
     cookieConfig={cookieConfig}
     language="de"
     translations={cookieBannerTranslations}
-    inEditorMode={Scrivito.isEditorLoggedIn()}
-    isExcludedPage={
-      Scrivito.currentPage().get("hideCookieBanner") || false
-    }
     logoUrl={logoUrl}
   >
   ....
-  <CookieBanner />
+  <CookieBanner hideOnLoad={Scrivito.isEditorLoggedIn()} />
  </CookieConsentProvider 
 ...
 </CookiesProvider>
