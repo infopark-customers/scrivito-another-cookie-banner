@@ -1,3 +1,6 @@
+## Unrealesed
+- [story] [Cookie Banner accessibility](https://www.pivotaltracker.com/story/show/185229075)
+- [fix] [CookieGatekeeper returns corrupted nexting](https://www.pivotaltracker.com/story/show/185414208)
 ## 1.1.0
 - [new] add additional parameter to define page as excluded
 - [fix] remove excluded domains
