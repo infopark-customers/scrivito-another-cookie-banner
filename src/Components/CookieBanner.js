@@ -6,20 +6,8 @@ import Body from "./Body";
 import Footer from "./Footer";
 import "../assets/main.scss";
 
-export default function CookieBanner({ hideOnLoad }) {
-  const {
-    bannerVisibility,
-    switchBannerMode,
-    setBannerVisibility,
-    cookieExists,
-  } = useCookieConsent();
-
-  React.useEffect(() => {
-    if (!cookieExists() && !hideOnLoad) {
-      setBannerVisibility(true);
-    }
-  }, []);
-
+export default function CookieBanner() {
+  const { bannerVisibility, switchBannerMode, I18n } = useCookieConsent();
   return (
     <Modal
       backdrop="static"
@@ -30,6 +18,8 @@ export default function CookieBanner({ hideOnLoad }) {
       show={bannerVisibility}
       onHide={() => switchBannerMode()}
       scrollable
+      aria-label={I18n.t(`CookieBanner.label`, { ns: "cookieBanner" })}
+      keyboard={false}
     >
       <Header />
       <Body />

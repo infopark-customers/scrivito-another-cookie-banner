@@ -5,5 +5,10 @@ import {
   useCookieConsent,
   CookieConsentProvider,
 } from "./Components/CookieConsentContext";
-export { useCookieConsent, CookieConsentProvider, CookieBanner, CookieGatekeeper };
 
+export {
+  useCookieConsent,
+  CookieConsentProvider,
+  CookieBanner,
+  CookieGatekeeper,
+};

@@ -1,8 +1,6 @@
 ## 1.2.0
-- [new] possibility to hide banner depending on external condition. E.e. don't show banner on special content pages
-- [fix] extend README
-- [new] get rid of react-cookie lib. It siplified component in main app
-
+- [story] [Cookie Banner accessibility](https://www.pivotaltracker.com/story/show/185229075)
+- [fix] [CookieGatekeeper returns corrupted nexting](https://www.pivotaltracker.com/story/show/185414208)
 ## 1.1.0
 - [new] add additional parameter to define page as excluded
 - [fix] remove excluded domains
