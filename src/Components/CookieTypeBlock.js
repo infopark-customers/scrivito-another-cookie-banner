@@ -3,55 +3,60 @@ import Accordion from "react-bootstrap/Accordion";
 import className from "classnames";
 import SingleCookieBlock from "./SingleCookieBlock";
 import { useCookieConsent } from "./CookieConsentContext";
+import { onKeyAccess } from "../utils/accessibilityHelper";
 
 function CookieTypeBlock({ cookieDescription, eventKey }) {
   const { switchCookiesOfType, isCookieTypeAccepted, I18n } =
     useCookieConsent();
   const { name: typeName, cookies, editable } = cookieDescription;
 
+  const handleKeyDown = (keyEvent) => {
+    if (keyEvent.key === " ") {
+      keyEvent.preventDefault();
+      keyEvent.stopPropagation();
+    }
+
+    const toggledCookieAcceptence = !isCookieTypeAccepted(typeName);
+
+    onKeyAccess(keyEvent, () =>
+      switchCookiesOfType(typeName, toggledCookieAcceptence)
+    );
+  };
+
   return (
     <Accordion.Item eventKey={eventKey}>
-      <Accordion.Header as="div">
-        <span className="header-text-wrapper">
-          <h6>
-            {I18n.t(`cookieDefinitions.${typeName}.title`, {
-              ns: "cookieBanner",
-            })}
-          </h6>
-          <p>
-            {I18n.t(`cookieDefinitions.${typeName}.description`, {
-              ns: "cookieBanner",
-            })}
-          </p>
-        </span>
-        <div className="toggle-btn-wrapper">
-          <label
-            className={className("toggle-btn", { "is-disabled": !editable })}
-          >
-            <span
-              className="d-none"
-              title={I18n.t(`cookieDefinitions.${typeName}.buttons.all.title`, {
-                ns: "cookieBanner",
-              })}
-            >
-              {I18n.t(`cookieDefinitions.${typeName}.buttons.all.title`, {
-                ns: "cookieBanner",
-              })}
-            </span>
-            <input
-              type="checkbox"
-              onChange={(event) =>
-                switchCookiesOfType(typeName, event.target.checked)
-              }
-              checked={!editable || isCookieTypeAccepted(typeName)}
-              disabled={!editable}
-              value="accepted"
-            />
-            <span className="slider"></span>
-          </label>
+      <div className="d-flex justify-content-between border-bottom">
+        <div className="header-text-wrapper">
+          <form>
+            <div className="form-check">
+              <input
+                id={typeName}
+                className="form-check-input"
+                type="checkbox"
+                value="accepted"
+                onChange={(event) =>
+                  switchCookiesOfType(typeName, event.target.checked)
+                }
+                onKeyDown={handleKeyDown}
+                checked={!editable || isCookieTypeAccepted(typeName)}
+                disabled={!editable}
+              />
+              <label className="form-check-label" htmlFor={typeName}>
+                <span className="d-block bold">
+                  {I18n.t(`cookieDefinitions.${typeName}.title`, {
+                    ns: "cookieBanner",
+                  })}
+                </span>
+                {I18n.t(`cookieDefinitions.${typeName}.description`, {
+                  ns: "cookieBanner",
+                })}
+              </label>
+            </div>
+          </form>
         </div>
-      </Accordion.Header>
-      <Accordion.Body>
+        <Accordion.Header>{/* display arrow block */}</Accordion.Header>
+      </div>
+      <Accordion.Body className={className("", { disabled: !editable })}>
         <form className="accordion accordion-info">
           {cookies.map((cookie, indx) => (
             <SingleCookieBlock

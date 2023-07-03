@@ -2,28 +2,28 @@ import * as React from "react";
 import { Modal, Accordion } from "react-bootstrap";
 import CookieTypeBlock from "./CookieTypeBlock";
 import { useCookieConsent } from "./CookieConsentContext";
+import { onLinkAccess } from "../utils/accessibilityHelper";
 
 export default function Body() {
   const { cookieBlocks, isExtendedMode, I18n } = useCookieConsent();
 
-  if (isExtendedMode()) {
-    return (
-      <Modal.Body>
-        <h5>{I18n.t("settings.title", { ns: "cookieBanner" })}</h5>
-        <div className="sm-white-space" />
-        <Accordion>
-          {cookieBlocks().map((item, index) => (
-            <CookieTypeBlock
-              key={`c-${index}`}
-              cookieDescription={item}
-              eventKey={index}
-            />
-          ))}
-        </Accordion>
-      </Modal.Body>
-    );
-  }
-  return (
+  const renderExtendedMode = () => (
+    <Modal.Body>
+      <h5>{I18n.t("settings.title", { ns: "cookieBanner" })}</h5>
+      <div className="sm-white-space" />
+      <Accordion defaultActiveKey="0">
+        {cookieBlocks().map((item, index) => (
+          <CookieTypeBlock
+            key={`c-${index}`}
+            cookieDescription={item}
+            eventKey={index}
+          />
+        ))}
+      </Accordion>
+    </Modal.Body>
+  );
+
+  const renderSimpleBanner = () => (
     <Modal.Body>
       <h5>{I18n.t("SimpleBanner.title", { ns: "cookieBanner" })}</h5>
       <div
@@ -42,6 +42,7 @@ export default function Body() {
               title={item.title}
               target="_blank"
               rel="noreferrer"
+              onKeyDown={onLinkAccess}
             >
               {item.title}
             </a>
@@ -50,4 +51,6 @@ export default function Body() {
       </ul>
     </Modal.Body>
   );
+
+  return isExtendedMode() ? renderExtendedMode() : renderSimpleBanner();
 }

@@ -2,6 +2,9 @@
   "BannerHeader": {
     "logoAlt": "Logo von BImA"
   },
+  "CookieBanner": {
+    "label": "Diese Webseite verwendet Cookies"
+  },
   "CookieDeclinedPlaceholder": {
     "buttonText": "Cookies zulassen",
     "gmap": {
