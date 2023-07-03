@@ -1,32 +1,35 @@
 {
   "BannerHeader": {
-    "logoAlt": "Logo von BImA"
+    "logoAlt": "BImA Logo"
+  },
+  "CookieBanner": {
+    "label": "This website uses cookies"
   },
   "CookieDeclinedPlaceholder": {
-    "buttonText": "Cookies zulassen",
+    "buttonText": "Allow Cookies",
     "gmap": {
       "iconClass": "fas fa-map-marked-alt",
-      "title": "Cookies abgelehnt",
-      "text": "Sie haben der Verwendung von Cookies nicht zugestimmt. Solange Sie die Zustimmung nicht gegeben haben, wird dieses Element nicht dargestellt."
+      "title": "Cookies declined",
+      "text": "You have not consented to the use of cookies. This element will not be displayed until you give consent."
     }
   },
   "buttons": {
-    "settings": "Einstellungen",
-    "acceptAll": "Alle zulassen",
-    "declineAll": "Alle ablehnen",
-    "saveAndClose": "speichern und schliessen"
+    "settings": "Settings",
+    "acceptAll": "Accept All",
+    "declineAll": "Decline All",
+    "saveAndClose": "Save and Close"
   },
   "SimpleBanner": {
-    "title": "Nutzung von Cookies und andere Technologien.",
-    "text": "<p>Die BImA nutzt auf ihrer Website Cookies und vergleichbare Funktionen zur Verarbeitung von Endgeräteinformationen und personenbezogenen Daten. Die Verarbeitung dient der Einbindung von Inhalten, externen Diensten und Elementen Dritter, der Bereitstellung BImA-eigener Dienste sowie der statistischen Analyse/Messung. Je nach Funktion werden dabei Daten an Dritte weitergegeben innerhalb der EU. Ihre Einwilligung ist stets freiwillig, für die Nutzung unserer Website nicht erforderlich und kann jederzeit über den Link “Cookie-Einstellungen” in der Fußzeile unten abgelehnt oder widerrufen werden.</p>",
+    "title": "Use of Cookies and Other Technologies",
+    "text": "<p>BImA uses cookies and similar technologies on its website for processing device information and personal data. The processing is used for integrating content, external services, and third-party elements, providing BImA's own services, and statistical analysis/measurement. Depending on the functionality, data may be shared with third parties within the EU. Your consent is always voluntary, not required for the use of our website, and can be declined or revoked at any time through the 'Cookie Settings' link in the footer below.</p>",
     "links": [
       {
-        "url": "https://resources.bundesimmobilien.de/bima/de/datenschutz",
-        "title": "Datenschutzerklärung"
+        "url": "https://resources.bundesimmobilien.de/bima/en/privacy-policy",
+        "title": "Privacy Policy"
       },
       {
-        "url": "https://resources.bundesimmobilien.de/bima/de/impressum",
-        "title": "Impressum"
+        "url": "https://resources.bundesimmobilien.de/bima/en/imprint",
+        "title": "Imprint"
       }
     ]
   },
@@ -34,50 +37,50 @@
     "functional": {
       "buttons": {
         "all": {
-          "title": "Alle Cookies"
+          "title": "All Cookies"
         }
       },
-      "title": "Funktionell",
-      "description": "Mit dieses Cookies werden Ihnen auf der Webseite zusätzliche Funktionen bereitgestellt.",
+      "title": "Functional",
+      "description": "These cookies provide you with additional functionality on the website.",
       "cookies": {
         "gmap": {
           "title": "Google Maps",
           "description": {
             "title": "Google",
-            "text": "Dieses Cookie wird vom Google ('google.com') gesetzt."
+            "text": "This cookie is set by Google ('google.com')."
           }
         },
         "vimeo": {
           "title": "Vimeo Video",
           "description": {
             "title": "Vimeo",
-            "text": "Dieses Cookie wird vom Video-Host-Service 'vimeo.com' gesetzt."
+            "text": "This cookie is set by the video hosting service 'vimeo.com'."
           }
         }
       }
     },
     "essential": {
-      "title": "Essentiell",
-      "description": "Diese Cookies werden für die Grundfunktionen der Website benötigt.",
+      "title": "Essential",
+      "description": "These cookies are necessary for the basic functions of the website.",
       "cookies": {
         "authentication": {
-          "title": "Authentifizierung",
+          "title": "Authentication",
           "description": {
-            "title": "Authentifizierung",
-            "text": "In diesem Cookie wird die Information über den aktuell an der Seite angemeldenten Benutzer gespeichert."
+            "title": "Authentication",
+            "text": "This cookie stores information about the currently logged-in user on the site."
           }
         },
         "cookie_consent": {
-          "title": "Cookie-Zustimmung",
+          "title": "Cookie Consent",
           "description": {
-            "title": "Cookie-Zustimmung",
-            "text": "In diesem Cookie wird Ihre Zustimmung über die Verwendung der Cookies gepeichert."
+            "title": "Cookie Consent",
+            "text": "This cookie stores your consent regarding the use of cookies."
           }
         }
       }
     }
   },
   "settings": {
-    "title": "Cookie-Einstellungen"
+    "title": "Cookie Settings"
   }
 }
