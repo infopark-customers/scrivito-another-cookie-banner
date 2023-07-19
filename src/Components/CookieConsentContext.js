@@ -4,6 +4,10 @@ import domainName from "../utils/domainName";
 import defaultConfig from "../config/cookieConfiguration.json";
 import I18n from "../config/i18n";
 
+const ACCEPTED = "accepted";
+const DECLINED = "declined";
+const EXTENDED_MODE = "expanded";
+const SIMPLE_MODE = "simple";
 
 const CookieConsentContext = React.createContext({});
 
@@ -15,15 +19,18 @@ export function CookieConsentProvider({
   translations,
 }) {
   const cConfig = cookieConfig || defaultConfig;
-  const COOKIE_NAME = cConfig.name || defaultConfig.name;
-  const ACCEPTED = "accepted";
-  const DECLINED = "declined";
-  const EXTENDED_MODE = "expanded";
-  const SIMPLE_MODE = "simple";
+  const consentCookieName = cConfig.name || defaultConfig.name;
+
+  // https://traviswimer.com/blog/easily-fix-react-hydration-errors/
+  const [hydrated, setHydrated] = React.useState(false);
+  const [bannerVisibility, setBannerVisibility] = React.useState(false);
+  const [cookieConsentChoice, setCookieConsentChoice] = React.useState({});
+  const [bannerMode, setBannerMode] = React.useState(SIMPLE_MODE);
 
   if (language && I18n.resolvedLanguage !== language) {
     I18n.language = language;
   }
+
   if (translations) {
     Object.keys(translations).forEach((lang) => {
       I18n.addResourceBundle(
@@ -35,19 +42,23 @@ export function CookieConsentProvider({
       );
     });
   }
-  const readCookieStore = () => {
-    const cookieValue = Cookies.get(COOKIE_NAME);
-    try {
-      return JSON.parse(cookieValue)
-    } catch (e) {
-      return {};
-    }
-  }
 
-  const [bannerVisibility, setBannerVisibility] = React.useState(false);
-  const [cookieConsentChoice, setCookieConsentChoice] = React.useState(readCookieStore())
+  React.useEffect(() => {
+    const readCookieStore = () => {
+      const cookieValue = Cookies.get(consentCookieName);
+      try {
+        return JSON.parse(cookieValue);
+      } catch (e) {
+        return {};
+      }
+    };
 
-  const [bannerMode, setBannerMode] = React.useState(SIMPLE_MODE);
+    setCookieConsentChoice(readCookieStore());
+
+    // This forces a rerender, so the children are rendered
+    // the second time but not the first to match pre-rendered content.
+    setHydrated(true);
+  }, [consentCookieName]);
 
   const setDecisionForAllCookies = (decision) => {
     setCookieDecision(editableCookies, decision);
@@ -68,7 +79,7 @@ export function CookieConsentProvider({
       options.domain = dName;
     }
     setCookieConsentChoice(value);
-    Cookies.set(COOKIE_NAME, JSON.stringify(value), options);
+    Cookies.set(consentCookieName, JSON.stringify(value), options);
   };
 
   const calculateCookieDecision = (name, decision) => ({
@@ -125,6 +136,7 @@ export function CookieConsentProvider({
   return (
     <CookieConsentContext.Provider
       value={{
+        hydrated,
         I18n,
         logoUrl,
         bannerVisibility,
@@ -140,7 +152,7 @@ export function CookieConsentProvider({
         isCookieTypeAccepted: (typeName) => isCookieTypeAccepted(typeName),
         cookieKeysForName: (cookieName) => cookieKeysForName(cookieName),
         saveAndClose: () => saveAndClose(),
-        cookieExists: () => !!Cookies.get(COOKIE_NAME),
+        cookieExists: () => !!Cookies.get(consentCookieName),
         switchCookiesOfType: (typeName, shouldAccept) =>
           setCookieDecision(
             cookieTypeNames(typeName),
