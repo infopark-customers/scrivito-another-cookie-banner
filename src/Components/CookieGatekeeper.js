@@ -7,7 +7,7 @@ function CookieGatekeeper({ children, cookieName }) {
 
   if (!isAccepted(cookieName)) {
     return (
-      <CookieDeclinedPlaceholder
+      <CookieDeclinedPlaceholder key="cookie-declined"
         name={cookieName}
         iconClass={I18n.t(`CookieDeclinedPlaceholder.${cookieName}.iconClass`, {
           ns: "cookieBanner",
@@ -25,7 +25,7 @@ function CookieGatekeeper({ children, cookieName }) {
     );
   }
 
-  return <>{children}</>;
+  return <React.Fragment key="cookie-accepted">{children}</React.Fragment>;
 }
 
 export default CookieGatekeeper;
