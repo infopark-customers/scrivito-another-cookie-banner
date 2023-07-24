@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Button } from "react-bootstrap";
+
 import { useCookieConsent } from "./CookieConsentContext";
 import { onKeyAccess } from "../utils/accessibilityHelper";
 
@@ -11,6 +12,7 @@ function CookieDeclinedPlaceholder({
   buttonText,
 }) {
   const { switchDecision } = useCookieConsent();
+
   return (
     <div className="map-container-message cookie-declined-placeholder">
       <div>
