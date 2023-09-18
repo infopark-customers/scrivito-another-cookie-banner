@@ -1,11 +1,12 @@
 import * as React from "react";
-import Cookies from "js-cookie";
-import domainName from "../utils/domainName";
+import isEmpty from "lodash/isEmpty";
+
 import defaultConfig from "../config/cookieConfiguration.json";
 import I18n from "../config/i18n";
+import logger from "../utils/logger";
+import { getCookieValue, setCookieValue } from "../utils/cookie";
+import { ACCEPTED, DECLINED } from "../utils/definitions";
 
-const ACCEPTED = "accepted";
-const DECLINED = "declined";
 const EXTENDED_MODE = "expanded";
 const SIMPLE_MODE = "simple";
 
@@ -44,43 +45,23 @@ export function CookieConsentProvider({
   }
 
   React.useEffect(() => {
-    const readCookieStore = () => {
-      const cookieValue = Cookies.get(consentCookieName);
-      try {
-        return JSON.parse(cookieValue);
-      } catch (e) {
-        return {};
-      }
-    };
+    const value = getCookieValue(consentCookieName);
 
-    setCookieConsentChoice(readCookieStore());
+    logger.debug("[ScrivitoCookieBanner] initialize with:", value);
+    setCookieConsentChoice(value);
+
+    if (isEmpty(value)) {
+      setBannerVisibility(true);
+    }
 
     // This forces a rerender, so the children are rendered
     // the second time but not the first to match pre-rendered content.
     setHydrated(true);
   }, [consentCookieName]);
 
-  const setDecisionForAllCookies = (decision) => {
-    setCookieDecision(editableCookies, decision);
-    setBannerVisibility(false);
-  };
-
   const editableCookies = cConfig.blocks.flatMap((item) =>
     item.editable ? item.cookies : []
   );
-
-  const saveDecision = (value) => {
-    const options = {
-      path: "/",
-      expires: new Date(new Date().setFullYear(new Date().getFullYear() + 1)),
-    };
-    const dName = domainName(window.location.hostname);
-    if (dName) {
-      options.domain = dName;
-    }
-    setCookieConsentChoice(value);
-    Cookies.set(consentCookieName, JSON.stringify(value), options);
-  };
 
   const calculateCookieDecision = (name, decision) => ({
     [name]: { decision, time: new Date() },
@@ -88,10 +69,17 @@ export function CookieConsentProvider({
 
   const setCookieDecision = (names, decision) => {
     let newValues = { ...cookieConsentChoice };
+
+    logger.debug("[ScrivitoCookieBanner] set consent:", names, decision);
+
     names.forEach((name) => {
       newValues = { ...newValues, ...calculateCookieDecision(name, decision) };
     });
-    saveDecision(newValues);
+
+    logger.debug("[ScrivitoCookieBanner] save consents:", newValues);
+
+    setCookieConsentChoice(newValues);
+    setCookieValue(consentCookieName, newValues);
   };
 
   const isAccepted = (name) => {
@@ -111,9 +99,11 @@ export function CookieConsentProvider({
   const isCookieConsentEmpty = () =>
     Object.keys(cookieConsentChoice).length === 0;
 
-  const saveAndClose = () => {
-    if (isCookieConsentEmpty()) {
-      setDecisionForAllCookies(DECLINED);
+  const saveAndClose = (decision) => {
+    if (decision === ACCEPTED || decision === DECLINED) {
+      setCookieDecision(editableCookies, decision);
+    } else if (isCookieConsentEmpty()) {
+      setCookieDecision(editableCookies, DECLINED);
     }
     setBannerVisibility(false);
   };
@@ -140,10 +130,9 @@ export function CookieConsentProvider({
         I18n,
         logoUrl,
         bannerVisibility,
+        config: cConfig,
         cookieConsentChoice,
-        cookieBlocks: () => cConfig.blocks,
-        acceptAll: () => setDecisionForAllCookies(ACCEPTED),
-        declineAll: () => setDecisionForAllCookies(DECLINED),
+        saveAndClose,
         isAccepted: (cookieName) => isAccepted(cookieName),
         switchDecision: (cookieName) => switchDecision(cookieName),
         setBannerVisibility: (choice) => setBannerVisibility(choice),
@@ -151,8 +140,6 @@ export function CookieConsentProvider({
         isExtendedMode: () => bannerMode === EXTENDED_MODE,
         isCookieTypeAccepted: (typeName) => isCookieTypeAccepted(typeName),
         cookieKeysForName: (cookieName) => cookieKeysForName(cookieName),
-        saveAndClose: () => saveAndClose(),
-        cookieExists: () => !!Cookies.get(consentCookieName),
         switchCookiesOfType: (typeName, shouldAccept) =>
           setCookieDecision(
             cookieTypeNames(typeName),

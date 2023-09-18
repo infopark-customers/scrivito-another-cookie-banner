@@ -1,17 +1,14 @@
 import * as React from "react";
 import { Modal, Button } from "react-bootstrap";
+
 import { useCookieConsent } from "./CookieConsentContext";
 import { onKeyAccess } from "../utils/accessibilityHelper";
+import { ACCEPTED, DECLINED } from "../utils/definitions";
 
 export default function Footer() {
-  const {
-    saveAndClose,
-    acceptAll,
-    declineAll,
-    switchBannerMode,
-    isExtendedMode,
-    I18n,
-  } = useCookieConsent();
+  const { saveAndClose, switchBannerMode, isExtendedMode, I18n } =
+    useCookieConsent();
+
   if (isExtendedMode()) {
     return (
       <Modal.Footer>
@@ -25,8 +22,10 @@ export default function Footer() {
         </Button>
         <Button
           variant="primary"
-          onClick={acceptAll}
-          onKeyDown={(keyEvent) => onKeyAccess(keyEvent, () => acceptAll())}
+          onClick={() => saveAndClose(ACCEPTED)}
+          onKeyDown={(keyEvent) =>
+            onKeyAccess(keyEvent, () => saveAndClose(ACCEPTED))
+          }
           className="btn-cta"
         >
           {I18n.t("buttons.acceptAll", { ns: "cookieBanner" })}
@@ -34,6 +33,7 @@ export default function Footer() {
       </Modal.Footer>
     );
   }
+
   return (
     <Modal.Footer>
       <button
@@ -47,16 +47,20 @@ export default function Footer() {
       </button>
       <Button
         variant="primary"
-        onClick={acceptAll}
-        onKeyDown={(keyEvent) => onKeyAccess(keyEvent, () => acceptAll())}
+        onClick={() => saveAndClose(ACCEPTED)}
+        onKeyDown={(keyEvent) =>
+          onKeyAccess(keyEvent, () => saveAndClose(ACCEPTED))
+        }
         className="btn-cta"
       >
         {I18n.t("buttons.acceptAll", { ns: "cookieBanner" })}
       </Button>
       <Button
         variant="primary"
-        onClick={declineAll}
-        onKeyDown={(keyEvent) => onKeyAccess(keyEvent, () => declineAll())}
+        onClick={() => saveAndClose(DECLINED)}
+        onKeyDown={(keyEvent) =>
+          onKeyAccess(keyEvent, () => saveAndClose(DECLINED))
+        }
         className="btn-cta"
       >
         {I18n.t("buttons.declineAll", { ns: "cookieBanner" })}

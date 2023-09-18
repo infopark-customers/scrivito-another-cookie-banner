@@ -1,10 +1,11 @@
 # Scrivito another cookie banner
 
-This cookie banner can be used for multiple subdomains. It save cookie consent as domain wide cookie. 
+This cookie banner can be used for multiple subdomains.
+It saves cookie consent as domain wide cookie.
 
 ## Configuration
 
-Banner can be configurated via json structure. 
+Banner can be configurated via JSON structure.
 
 Example:
 ```
@@ -36,12 +37,14 @@ Example:
   ]
 }
 ```
+
 ## Translations
-I18next is used for localization. There are some standard localization which can be overritten by configuration.
 
-Some blocks in translation files depends on cookies configurations. 
+I18next is used for localization. There are some standard localization which can be overwritten by configuration.
 
-`CookieDeclinedPlaceholder`: contains translations for Gatekeeper-Component. 
+Some blocks in translation files depends on cookies configurations.
+
+`CookieDeclinedPlaceholder`: contains translations for Gatekeeper-Component.
 To define diffrent localization for different cookies you have to define new block under `CookieDeclinedPlaceholder` which have same name like your cookie. e.g for cookie named `gmap` you should create block:
 ```
   "gmap": {
@@ -51,10 +54,10 @@ To define diffrent localization for different cookies you have to define new blo
   }
 ```
 
-Next dynamic blocks are trasnslations for expanded banner view. 
-Under the key  `cookieDefinitions` you have to define blocks for each cookie-group. 
+Next dynamic blocks are translations for expanded banner view.
+Under the key  `cookieDefinitions` you have to define blocks for each cookie-group.
 Inside of such groups you alse have to define descriptions for every cookie.
-``` 
+```
   "cookieDefinitions": {
     "functional": {
       "buttons": {
@@ -106,9 +109,7 @@ Inside of such groups you alse have to define descriptions for every cookie.
 
 ## Usage in React.js
 
-### Context Provider
-
-####Initialize Context provider
+### User Cookie Context Provider
 
 ```
 import { CookieConsentProvider, CookieBanner } from "scrivito-cookie-banner";
@@ -126,12 +127,12 @@ const cookieBannerTranslations = {de: cookieBannerTranslationsDe};
   >
   ....
   <CookieBanner hideOnLoad={Scrivito.isEditorLoggedIn()} />
- </CookieConsentProvider 
+ </CookieConsentProvider
 ...
 </CookiesProvider>
 ```
 
-####Open banner after it was close:
+#### Open Cookie Banner from link
 ```
 import { useCookieConsent } from "scrivito-cookie-banner";
 
@@ -147,7 +148,7 @@ export default Footer;
 
 ```
 
-####Use Gatekeeper component
+#### Use Gatekeeper component
 
 ```
 import { CookieGatekeeper } from "scrivito-cookie-banner";
@@ -161,4 +162,13 @@ function MapComponent() {
 }
 
 ```
-Aslong user don't accepted usage of Cookie named gmap (s. configuration) children component wont be rendered
+As long as user don't accepted usage of Cookie named gmap (s. configuration) children component wont be rendered.
+
+
+### Debug Mode
+
+Set debug mode in `window.localStorage`.
+
+```
+ window.localStorage.setItem("ScrivitoCookieBanner.debug", "true")
+```

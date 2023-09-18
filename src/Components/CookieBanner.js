@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Modal } from "react-bootstrap";
+
 import { useCookieConsent } from "./CookieConsentContext";
 import Header from "./Header";
 import Body from "./Body";
@@ -7,7 +8,13 @@ import Footer from "./Footer";
 import "../assets/main.scss";
 
 export default function CookieBanner() {
-  const { bannerVisibility, switchBannerMode, I18n } = useCookieConsent();
+  const { bannerVisibility, switchBannerMode, I18n, config } =
+    useCookieConsent();
+
+  if (!config || !Array.isArray(config.blocks)) {
+    return null;
+  }
+
   return (
     <Modal
       backdrop="static"
