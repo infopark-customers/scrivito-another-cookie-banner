@@ -2,7 +2,7 @@
   "parser": "@babel/eslint-parser",
   "plugins": ["import", "prettier", "react", "react-hooks"],
   "settings": {
-    "import/resolver": "webpack",
+    "import/resolver": ["webpack", "node"],
     "react": { "version": "17" }
   },
   "parserOptions": {

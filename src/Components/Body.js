@@ -5,14 +5,14 @@ import { useCookieConsent } from "./CookieConsentContext";
 import { onLinkAccess } from "../utils/accessibilityHelper";
 
 export default function Body() {
-  const { cookieBlocks, isExtendedMode, I18n } = useCookieConsent();
+  const { config, isExtendedMode, I18n } = useCookieConsent();
 
   const renderExtendedMode = () => (
     <Modal.Body>
       <h5>{I18n.t("settings.title", { ns: "cookieBanner" })}</h5>
       <div className="sm-white-space" />
       <Accordion defaultActiveKey="0">
-        {cookieBlocks().map((item, index) => (
+        {config.blocks.map((item, index) => (
           <CookieTypeBlock
             key={`c-${index}`}
             cookieDescription={item}
