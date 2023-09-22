@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.3.2
+- [fix] [Cookie Consent dialog does not pop up, if consent not set of www.bundesimmobilien.de](https://www.pivotaltracker.com/story/show/184081546)
+
 ## 1.3.1
 - [fix] [PWS Wohnraumoffensive: Videovorschau im Mini-Format ](https://www.pivotaltracker.com/story/show/185414208)
 
