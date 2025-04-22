@@ -586,11 +586,9 @@ form {
 
 //** form modal **//
 .modal-dialog {
-  margin: 5.5rem auto;
   max-width: 95%;
   transform: none !important;
   @media screen and (min-width: 992px) {
-    margin: 1.5rem auto;
     max-width: 80%;
   }
 }

@@ -1,16 +1,28 @@
 //***** cookie banner styles*****//
 .modal-dialog {
-  margin: 2% auto;
+  margin: 0 auto;
 }
 .modal-header {
-  padding: 0 1.3rem 0 0;
+  padding: 0 1.1rem 0 0;
   img {
-    height: 4rem;
-    width: auto;
+    height: auto;
+    margin: 25px;
+    width: 180px;
+    @media screen and (min-width: 992px) {
+      margin: 40px;
+      width: 230px;
+    }
+  }
+}
+.modal-body,
+.modal-footer {
+  padding-left: 25px;
+  padding-right: 25px;
+  @media screen and (min-width: 992px) {
+    padding: 30px 40px 15px 40px;
   }
 }
 .modal-body {
-  padding: 1.3rem;
   ul.inline-no-list-type {
     list-style-type: none;
     padding-left: 0;
