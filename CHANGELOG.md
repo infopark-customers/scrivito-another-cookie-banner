@@ -1,7 +1,7 @@
 # Changelog
 
-## unreleased
-- [new] [Exchange the BImA Logo in Apps and Websites](https://github.com/infopark-customers/bima-project-webpages-on-scrivito/issues/119)
+## 1.4.0
+- [story] [Exchange the BImA Logo in Apps and Websites](https://github.com/infopark-customers/bima-project-webpages-on-scrivito/issues/119)
 
 ## 1.3.2
 - [fix] [Cookie Consent dialog does not pop up, if consent not set of www.bundesimmobilien.de](https://www.pivotaltracker.com/story/show/184081546)
