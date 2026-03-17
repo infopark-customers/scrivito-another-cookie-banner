@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "style": "dist/index.css",
   "scripts": {
+    "prepare": "npm run build",
     "publish": "npm ci && npm run build && npm publish",
     "build": "rm -rf dist && webpack",
     "build-dev": "npm ci && npm run build && rm -rf node_modules",
